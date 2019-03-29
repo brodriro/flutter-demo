@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'HomeView.dart';
-import '../../../main.dart';
+import 'package:base_flutter/presentation/views/home/HomeView.dart';
 
-class HomePresenter implements DefaultPresenter {
+class HomePresenter {
   HomeView homeView;
 
   void start() {
-    debugPrint("===========HomePresenter start2============");
-    homeView.onCompleteData();
+    debugPrint("===========HomePresenter start verga============");
+    this.homeView.onCompleteData(["a", "b"]);
   }
-
-  @override
-  void destroy() {}
 }

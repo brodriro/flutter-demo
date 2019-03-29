@@ -10,11 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Startup Name Generator',
-      home:  new HomeRoute( new DefaultPresenter()),
+      home:  new HomeRoute(),
     );
   }
-}
-
-class DefaultPresenter {
-  void destroy(){}
 }

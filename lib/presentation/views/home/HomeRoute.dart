@@ -5,24 +5,26 @@ import 'HomePresenter.dart';
 import 'HomeView.dart';
 
 class HomeRoute extends StatefulWidget {
-  final HomePresenter homePresenter;
-  HomeRoute(this.homePresenter) : super();
+  final HomePresenter homePresenter = new HomePresenter();
   @override
   RandomWordsState createState() => new RandomWordsState();
 }
 
 class RandomWordsState extends State<HomeRoute> implements HomeView {
-  final HomePresenter homePresenter = new HomePresenter();
-  List<String> _suggestions = [];
+  List<String> _suggestions = new List<String>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
-  Widget build(BuildContext context) {
-    
+  void initState() {
+    super.initState();
+
+    this.widget.homePresenter.homeView = this;
     debugPrint("===========HomePresenter start============");
+    this.widget.homePresenter.start();
+  }
 
-    homePresenter.start();
-
+  @override
+  Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: const Text('Startup Name Generator'),
@@ -35,7 +37,7 @@ class RandomWordsState extends State<HomeRoute> implements HomeView {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (BuildContext _context, int i) {
-          return _buildRow(_suggestions[i]);
+          return (_suggestions.length == 0) ? null : _buildRow(_suggestions[i]);
         });
   }
 
@@ -48,13 +50,15 @@ class RandomWordsState extends State<HomeRoute> implements HomeView {
     );
   }
 
- @override
-  void onCompleteData() {
+  @override
+  void onCompleteData(Iterable<String> iterableList) {
     debugPrint("===========HomePresenter onCompleteData============");
     print("onCompleteData");
-    /*setState(() {
-      _suggestions.addAll(iterableList);
-    });*/
+     _suggestions.addAll(iterableList);
+    setState(() {
+       _suggestions.addAll(iterableList);
+      debugPrint("===========HomePresenter suggestions: ${_suggestions.length}" );
+    
+    });
   }
-
 }
