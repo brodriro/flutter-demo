@@ -5,39 +5,40 @@ import 'HomePresenter.dart';
 import 'HomeView.dart';
 
 class HomeRoute extends StatefulWidget {
+  //Declarar Presenter
   final HomePresenter homePresenter = new HomePresenter();
-  @override
-  RandomWordsState createState() => new RandomWordsState();
-}
 
-class RandomWordsState extends State<HomeRoute> implements HomeView {
-  List<String> _suggestions = new List<String>();
+  @override
+  HomeState createState() => new HomeState();
+}
+//AUTENTICACION MUTUA FLUTTER
+
+class HomeState extends State<HomeRoute> implements HomeView {
+  List<String> mListNames = new List<String>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
   void initState() {
     super.initState();
-
-    this.widget.homePresenter.homeView = this;
-    debugPrint("===========HomePresenter start============");
-    this.widget.homePresenter.start();
   }
 
   @override
   Widget build(BuildContext context) {
+    initPresenter();
+
     return new Scaffold(
-      appBar: new AppBar(
-        title: const Text('Startup Name Generator'),
-      ),
-      body: _buildSuggestions(),
-    );
+        appBar: new AppBar(
+          title: const Text('Flutter Demo'),
+        ),
+        body: _buildSuggestions());
   }
 
   Widget _buildSuggestions() {
     return new ListView.builder(
+        itemCount: mListNames.length,
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (BuildContext _context, int i) {
-          return (_suggestions.length == 0) ? null : _buildRow(_suggestions[i]);
+          return (mListNames.length == 0) ? null : _buildRow(mListNames[i]);
         });
   }
 
@@ -51,14 +52,23 @@ class RandomWordsState extends State<HomeRoute> implements HomeView {
   }
 
   @override
-  void onCompleteData(Iterable<String> iterableList) {
-    debugPrint("===========HomePresenter onCompleteData============");
-    print("onCompleteData");
-     _suggestions.addAll(iterableList);
+  void onCompleteData(List<String> list) {
     setState(() {
-       _suggestions.addAll(iterableList);
-      debugPrint("===========HomePresenter suggestions: ${_suggestions.length}" );
-    
+      mListNames = new List<String>();
+      mListNames.addAll(list);
     });
+  }
+
+  void initPresenter() {
+    this.widget.homePresenter.homeView = this;
+    this.widget.homePresenter.start();
+    this.widget.homePresenter.getDataList();
+  }
+
+  @override
+  void dispose() {
+    debugPrint("===== dispose =====");
+    // TODO: implement dispose
+    super.dispose();
   }
 }

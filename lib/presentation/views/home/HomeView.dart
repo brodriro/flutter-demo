@@ -1,3 +1,3 @@
 abstract class HomeView {
-  void onCompleteData(Iterable<String> iterable){}
+  void onCompleteData(List<String> iterable) {}
 }
