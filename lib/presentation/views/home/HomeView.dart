@@ -1,0 +1,3 @@
+class HomeView {
+  void onCompleteData(){}
+}
