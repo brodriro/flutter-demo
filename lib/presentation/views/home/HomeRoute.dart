@@ -1,36 +1,39 @@
+import 'package:base_flutter/entities/User.dart';
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
+import '../components/cProfile.dart';
 
 class HomeRoute extends StatefulWidget {
   //Declarar Presenter
   final HomePresenter homePresenter = new HomePresenter();
-
+  
   @override
   HomeState createState() => new HomeState();
 }
-//AUTENTICACION MUTUA FLUTTER
 
 class HomeState extends State<HomeRoute> implements HomeView {
   List<String> mListNames = new List<String>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
+  User user;
 
   @override
   void initState() {
     super.initState();
+    initPresenter();
   }
 
   @override
   Widget build(BuildContext context) {
-    initPresenter();
+    debugPrint("build Home route - User : ${user.getUsername}");
 
     return new Scaffold(
-        appBar: new AppBar(
-          title: const Text('Flutter Demo'),
-        ),
-        body: _buildSuggestions());
+      body: ProfileComponent(user)
+
+    );
   }
 
+  
   Widget _buildSuggestions() {
     return new ListView.builder(
         itemCount: mListNames.length,
@@ -49,25 +52,24 @@ class HomeState extends State<HomeRoute> implements HomeView {
     );
   }
 
+
   @override
-  void onCompleteData(List<String> list) {
+  void onCompleteProfile(User _user) {
     setState(() {
-      mListNames = new List<String>();
-      mListNames.addAll(list);
+     this.user = _user; 
+     debugPrint("Screen : User ${user.getUsername}");
     });
+    
+  }
+
+  @override
+  void onNetworkError() {
+    debugPrint("Screen: network Error");
   }
 
   void initPresenter() {
     this.widget.homePresenter.homeView = this;
     this.widget.homePresenter.start();
-   // this.widget.homePresenter.getDataList();
     this.widget.homePresenter.getUser();
-  }
-
-  @override
-  void dispose() {
-    debugPrint("===== dispose =====");
-    // TODO: implement dispose
-    super.dispose();
   }
 }

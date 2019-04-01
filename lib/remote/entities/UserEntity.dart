@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:base_flutter/entities/User.dart';
 
 UserEntity userEntityFromJson(String str) {
@@ -13,38 +12,95 @@ String userEntityToJson(UserEntity data) {
 }
 
 class UserEntity {
-  int userId;
-  int id;
-  String title;
-  bool completed;
+  String username;
+  String name;
+  String lastname;
+  String image;
+  String occupation;
+  String age;
+  String email;
+  String location;
+  SocialEntity socialEntity;
 
   UserEntity({
-    this.userId,
-    this.id,
-    this.title,
-    this.completed,
+    this.username,
+    this.name,
+    this.lastname,
+    this.image,
+    this.occupation,
+    this.age,
+    this.email,
+    this.location,
+    this.socialEntity,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
-        userId: json["userId"],
-        id: json["id"],
-        title: json["title"],
-        completed: json["completed"],
+        username: json["username"],
+        name: json["name"],
+        lastname: json["lastname"],
+        image: json["image"],
+        occupation: json["occupation"],
+        age: json["age"],
+        email: json["email"],
+        location: json["location"],
+        socialEntity: SocialEntity.fromJson(json["social"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "userId": userId,
-        "id": id,
-        "title": title,
-        "completed": completed,
+        "username": username,
+        "name": name,
+        "lastname": lastname,
+        "image": image,
+        "occupation": occupation,
+        "age": age,
+        "email": email,
+        "location": location,
+        "social": socialEntity.toJson(),
       };
 
   static User toUser(UserEntity userEntity) {
     return new User(
-      userEntity.userId,
-      userEntity.id,
-      userEntity.title,
-      userEntity.completed
-    );
+        userEntity.username,
+        userEntity.name,
+        userEntity.lastname,
+        userEntity.image,
+        userEntity.occupation,
+        userEntity.age,
+        userEntity.email,
+        userEntity.location,
+        SocialEntity.toSocial(userEntity.socialEntity));
+  }
+}
+
+class SocialEntity {
+  int posts;
+  int likes;
+  int shares;
+  int friends;
+
+  SocialEntity({
+    this.posts,
+    this.likes,
+    this.shares,
+    this.friends,
+  });
+
+  factory SocialEntity.fromJson(Map<String, dynamic> json) => new SocialEntity(
+        posts: json["posts"],
+        likes: json["likes"],
+        shares: json["shares"],
+        friends: json["friends"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "posts": posts,
+        "likes": likes,
+        "shares": shares,
+        "friends": friends,
+      };
+
+  static Social toSocial(SocialEntity socialEntity) {
+    return new Social(socialEntity.posts, socialEntity.likes,
+        socialEntity.shares, socialEntity.friends);
   }
 }

@@ -1,20 +1,52 @@
 class User {
-  int userId;
-  int id;
-  String title;
-  bool completed;
+  String _username;
+  String _name;
+  String _lastname;
+  String _image;
+  String _occupation;
+  String _age;
+  String _email;
+  String _location;
+  Social _social;
 
   User(
-    this.userId,
-    this.id,
-    this.title,
-    this.completed,
+    this._username,
+    this._name,
+    this._lastname,
+    this._image,
+    this._occupation,
+    this._age,
+    this._email,
+    this._location,
+    this._social,
   );
 
-  int get getUserId => this.userId;
-  int get getId => this.id;
-  String get getTitle => this.title;
-  bool get isComplete => this.completed;
+  String get getUsername => this._username;
+  String get getName => this._name;
+  String get getLastName => this._lastname;
+  String get getImage => this._image;
+  String get getOccupation => this._occupation;
+  String get getAge => this._age;
+  String get getEmail => this._email;
+  String get getLocation => this._location;
+  Social get getSocial => this._social;
+}
 
-  
+class Social {
+  int _posts;
+  int _likes;
+  int _shares;
+  int _friends;
+
+  Social(
+    this._posts,
+    this._likes,
+    this._shares,
+    this._friends,
+  );
+
+  int get getPost => this._posts;
+  int get getLikes => this._likes;
+  int get getShares => this._shares;
+  int get getFriends => this._friends;
 }

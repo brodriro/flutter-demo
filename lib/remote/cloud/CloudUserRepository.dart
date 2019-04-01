@@ -18,22 +18,10 @@ class CloudUserRepository implements UserRepositoryRemote {
     String url = ApiURL.userUrl;
     UserEntity userEntity;
 
-    debugPrint(
-        "Obteniendoo usuario desde consulta HTTP desde CloudUserRepository");
-
     final response = await _client.get(url);
-    debugPrint(
-        "====> Response status code: ${response.statusCode} <======");
     userEntity = userEntityFromJson(response.body);
-
-    debugPrint(
-        "====> Usuario obtenido ${response.body} <======");
 
     return UserEntity.toUser(userEntity);
   }
 }
-/**
- * https://app.quicktype.io/
- * https://jsonplaceholder.typicode.com/
- * 
- */
+

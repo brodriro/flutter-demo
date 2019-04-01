@@ -17,26 +17,9 @@ class HomePresenter {
   }
 
   void getUser() {
-    debugPrint("Presenter: getUser.Call()");
-
     this.userUseCase.getUser()
-    .catchError((onError)=>{
-      debugPrint("Presenter: userUseCase.CallError() => ${onError}")
-    });
-
-    debugPrint("Presenter: Usuario recibido");
+    .catchError((onError)=>{ this.homeView.onNetworkError() })
+    .then((_user) => this.homeView.onCompleteProfile(_user) );
   }
 
-  void getDataList() {
-
-    Observable.just((result)=>{
-      this.homeView.onCompleteData(["a", "c", "d"])
-    })
-    .handleError((error)=>{
-      debugPrint("handleError:" + error)
-    }).doOnListen(() => {
-      debugPrint("Finish")
-    });
-    
-  }
 }

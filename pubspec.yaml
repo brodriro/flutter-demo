@@ -44,6 +44,21 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Bold.ttf
+        - asset: assets/fonts/Raleway-Light.ttf
+          weight: 700 
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+
+
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

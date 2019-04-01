@@ -1,3 +1,6 @@
+import 'package:base_flutter/entities/User.dart';
+
 abstract class HomeView {
-  void onCompleteData(List<String> iterable);
+  void onCompleteProfile(User user);
+  void onNetworkError();
 }
