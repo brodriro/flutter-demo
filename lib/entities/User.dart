@@ -1,12 +1,20 @@
 class User {
-  String uName;
-  String uImage;
+  int userId;
+  int id;
+  String title;
+  bool completed;
 
-  User(name, image) {
-    this.uName = name;
-    this.uImage = image;
-  }
+  User(
+    this.userId,
+    this.id,
+    this.title,
+    this.completed,
+  );
 
-  String get name => this.uName;
-  String get image => this.uImage;
+  int get getUserId => this.userId;
+  int get getId => this.id;
+  String get getTitle => this.title;
+  bool get isComplete => this.completed;
+
+  
 }

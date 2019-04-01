@@ -1,5 +1,3 @@
-// Create an infinite scrolling lazily loaded list
-
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
@@ -62,7 +60,8 @@ class HomeState extends State<HomeRoute> implements HomeView {
   void initPresenter() {
     this.widget.homePresenter.homeView = this;
     this.widget.homePresenter.start();
-    this.widget.homePresenter.getDataList();
+   // this.widget.homePresenter.getDataList();
+    this.widget.homePresenter.getUser();
   }
 
   @override
