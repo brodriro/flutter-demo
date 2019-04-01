@@ -45,16 +45,18 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
 
-
+  assets:
+    - assets/images/avatar_default.jpg
   fonts:
     - family: Raleway
       fonts:
         - asset: assets/fonts/Raleway-Bold.ttf
-        - asset: assets/fonts/Raleway-Light.ttf
           weight: 700 
+        - asset: assets/fonts/Raleway-Light.ttf
+
     - family: Roboto
       fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Light.ttf
         - asset: assets/fonts/Roboto-Bold.ttf
           weight: 700
 

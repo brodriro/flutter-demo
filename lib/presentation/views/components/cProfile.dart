@@ -7,7 +7,6 @@ class ProfileComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(
       children: <Widget>[_header(), _body()],
     );
@@ -15,72 +14,122 @@ class ProfileComponent extends StatelessWidget {
 
   Widget _body() {
     return Container(
-      alignment: Alignment.bottomLeft,
       padding: EdgeInsets.all(10),
       child: Column(
+        textDirection: TextDirection.ltr,
         children: <Widget>[
           _textTitle("Name"),
-          _textDescription((_user == null) ? "" : _user.getName),
-          _textTitle("LastName"),
-          _textDescription((_user == null) ? "" : _user.getLastName),
+          _textDescription(
+              (_user == null) ? "" : "${_user.getName} ${_user.getLastName}"),
+          _textTitle("Age"),
+          _textDescription((_user == null) ? "" : "${_user.getAge} years"),
+          _textTitle("Email"),
+          _textDescription((_user == null) ? "" : _user.getEmail),
+          _textTitle("Location"),
+          _textDescription((_user == null) ? "" : _user.getLocation),
+          _textTitle("Occupation"),
+          _textDescription((_user == null) ? "" : _user.getOccupation),
         ],
       ),
     );
   }
 
   Widget _header() {
-    return Container(
-      height: 200,
-      color: Colors.blueAccent,
-      padding: EdgeInsets.all(10),
-      child: Row(
-        children: <Widget>[
-          Expanded(
+    Social social = (_user != null) ? _user.getSocial : null;
+    return Card(
+      elevation: 2,
+      margin: EdgeInsets.all(0),
+      child: Container(
+        height: 200,
+        color: Colors.blueAccent,
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
               child: Center(
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: (_user.getImage == null)
-                          ? null
-                          : NetworkImage(_user.getImage)),
-                  shape: BoxShape.circle,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.black38,
-                        blurRadius: 15.0,
-                        offset: Offset(0.0, 7.0))
-                  ]),
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: (_user == null)
+                            ? AssetImage("assets/images/avatar_default.jpg")
+                            : NetworkImage(_user.getImage),
+                      ),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: Colors.black38,
+                            blurRadius: 15.0,
+                            offset: Offset(0.0, 6.0))
+                      ]),
+                ),
+              ),
             ),
-          )),
-          Expanded(
-            child: Row(
-              verticalDirection: VerticalDirection.up,
-              children: <Widget>[
-
-              ],
+            Expanded(
+              flex: 2,
+              child: Container(
+                  margin: EdgeInsets.only(top: 25, left: 8),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: Column(children: <Widget>[
+                        _textTitle("Likes", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getLikes}" : "0",
+                            white: true),
+                        _textTitle("Shares", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getLikes}" : "0",
+                            white: true),
+                      ])),
+                      Expanded(
+                          child: Column(children: <Widget>[
+                        _textTitle("Posts", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getPost}" : "0",
+                            white: true),
+                        _textTitle("Friends", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getFriends}" : "0",
+                            white: true),
+                      ])),
+                    ],
+                  )),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _textTitle(String title) {
-    return Text(
-      title,
-      textAlign: TextAlign.left,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-    );
+  Widget _textTitle(String title, {bool white}) {
+    return Container(
+        alignment: Alignment.centerLeft,
+        margin: EdgeInsets.only(bottom: 2, top: 15),
+        child: Text(
+          title,
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: (white != null) ? Colors.white : Colors.black54,
+          ),
+        ));
   }
 
-  Widget _textDescription(String title) {
-    return Text(
-      title,
-      textAlign: TextAlign.left,
-      style: TextStyle(fontSize: 16),
-    );
+  Widget _textDescription(String title, {bool white}) {
+    return Container(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          textAlign: TextAlign.left,
+          style: TextStyle(
+              fontSize: 16,
+              color: (white != null) ? Colors.white : Colors.black54),
+        ));
   }
 }

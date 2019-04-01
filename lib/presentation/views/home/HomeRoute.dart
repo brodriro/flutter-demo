@@ -7,7 +7,7 @@ import '../components/cProfile.dart';
 class HomeRoute extends StatefulWidget {
   //Declarar Presenter
   final HomePresenter homePresenter = new HomePresenter();
-  
+
   @override
   HomeState createState() => new HomeState();
 }
@@ -17,6 +17,14 @@ class HomeState extends State<HomeRoute> implements HomeView {
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
   User user;
 
+  int indexTap = 0;
+
+  void onTapTapped(int index) {
+    setState(() {
+      indexTap = index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -25,15 +33,33 @@ class HomeState extends State<HomeRoute> implements HomeView {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("build Home route - User : ${user.getUsername}");
+
+    final List<Widget> widgetsChildren = [
+      ProfileComponent(user),
+      Text("hi"),
+      Text("data")
+    ];
+    //debugPrint("build Home route - User : ${user.getUsername}");
 
     return new Scaffold(
-      body: ProfileComponent(user)
-
+      body: widgetsChildren[indexTap],
+      bottomNavigationBar: Theme(
+        data: Theme.of(context)
+            .copyWith(canvasColor: Colors.white, primaryColor: Colors.purple),
+        child: BottomNavigationBar(
+            onTap: onTapTapped,
+            currentIndex: indexTap,
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search), title: Text("")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), title: Text("")),
+            ]),
+      ),
     );
   }
 
-  
   Widget _buildSuggestions() {
     return new ListView.builder(
         itemCount: mListNames.length,
@@ -52,14 +78,12 @@ class HomeState extends State<HomeRoute> implements HomeView {
     );
   }
 
-
   @override
   void onCompleteProfile(User _user) {
     setState(() {
-     this.user = _user; 
-     debugPrint("Screen : User ${user.getUsername}");
+      user = _user;
+      debugPrint("Screen : User ${user.getUsername}");
     });
-    
   }
 
   @override
