@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
-import 'package:base_flutter/presentation/di/ContainerDI.dart';
+import 'package:base_flutter/presentation/di/Injector.dart';
 
-void main() { 
-  ContainerDI.setup();
+void main() {
+  Injector.setup();
   runApp(new DemoApp());
 }
 
@@ -12,7 +12,7 @@ class DemoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return new MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Demo Flutter App',
       theme: ThemeData(fontFamily: 'Raleway'),
       home:  HomeRoute(),
     );

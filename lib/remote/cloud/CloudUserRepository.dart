@@ -1,16 +1,20 @@
+import 'dart:_http';
+import 'dart:io';
+
+import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/remote/entities/UserEntity.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
-import 'package:flutter/foundation.dart';
 import 'package:base_flutter/entities/User.dart';
-import 'package:http/http.dart' show Client;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:base_flutter/remote/network/ApiURL.dart';
-import 'package:kiwi/kiwi.dart';
 
 class CloudUserRepository implements UserRepositoryRemote {
   Client _client;
 
   CloudUserRepository(this._client) {
-    _client = Container().resolve<Client>();
+    _client = Injector.inject().resolve<Client>();
   }
 
   @override
@@ -23,5 +27,5 @@ class CloudUserRepository implements UserRepositoryRemote {
 
     return UserEntity.toUser(userEntity);
   }
-}
 
+}

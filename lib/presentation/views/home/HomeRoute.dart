@@ -1,12 +1,16 @@
 import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
 import '../components/cProfile.dart';
 
 class HomeRoute extends StatefulWidget {
-  //Declarar Presenter
-  final HomePresenter homePresenter = new HomePresenter();
+  HomePresenter homePresenter;
+
+  HomeRoute() {
+    this.homePresenter = Injector.inject().resolve<HomePresenter>();
+  }
 
   @override
   HomeState createState() => new HomeState();
@@ -39,8 +43,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
       Text("hi"),
       Text("data")
     ];
-    //debugPrint("build Home route - User : ${user.getUsername}");
-
+   
     return new Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
