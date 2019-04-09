@@ -9,6 +9,9 @@
 .history
 .svn/
 
+# Custom
+/assets/certificates/*
+
 # IntelliJ related
 *.iml
 *.ipr
