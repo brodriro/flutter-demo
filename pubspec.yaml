@@ -46,7 +46,8 @@ flutter:
   # the material Icons class.
 
   assets:
-    - assets/images/avatar_default.jpg
+    - assets/images/
+    - assets/certificates/
   fonts:
     - family: Raleway
       fonts:

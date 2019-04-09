@@ -37,7 +37,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
 
   @override
   Widget build(BuildContext context) {
-
+    
     final List<Widget> widgetsChildren = [
       ProfileComponent(user),
       Text("hi"),
@@ -48,7 +48,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context)
-            .copyWith(canvasColor: Colors.white, primaryColor: Colors.purple),
+            .copyWith(canvasColor: Colors.blueAccent, primaryColor: Colors.white),
         child: BottomNavigationBar(
             onTap: onTapTapped,
             currentIndex: indexTap,

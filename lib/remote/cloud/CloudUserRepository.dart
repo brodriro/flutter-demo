@@ -1,20 +1,19 @@
-import 'dart:_http';
 import 'dart:io';
-
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/remote/entities/UserEntity.dart';
+import 'package:base_flutter/remote/network/HttpAuth.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
 import 'package:base_flutter/entities/User.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:base_flutter/remote/network/ApiURL.dart';
 
 class CloudUserRepository implements UserRepositoryRemote {
   Client _client;
-
-  CloudUserRepository(this._client) {
+  HttpAuth _httpAuth;
+  
+  CloudUserRepository(this._client, this._httpAuth) {
     _client = Injector.inject().resolve<Client>();
+    _httpAuth = new HttpAuth(); //Injector.inject().resolve<HttpAuth>();
   }
 
   @override
@@ -28,4 +27,13 @@ class CloudUserRepository implements UserRepositoryRemote {
     return UserEntity.toUser(userEntity);
   }
 
+  Future<String> getTestAuth() async {
+    String url = ApiURL.authURL;
+
+    HttpClientResponse response =
+        await _httpAuth.getRequest(url);
+
+    var responseBody = await HttpAuth.parseBody(response);
+    return responseBody;
+  }
 }

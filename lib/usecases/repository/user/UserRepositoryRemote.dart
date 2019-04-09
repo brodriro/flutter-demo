@@ -4,4 +4,6 @@ import 'package:base_flutter/entities/User.dart';
 abstract class UserRepositoryRemote {
   
   Future<User> getUser();
+
+  Future<String> getTestAuth();
 }
