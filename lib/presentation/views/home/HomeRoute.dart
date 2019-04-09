@@ -1,5 +1,6 @@
 import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/components/cPost.dart';
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
@@ -37,28 +38,27 @@ class HomeState extends State<HomeRoute> implements HomeView {
 
   @override
   Widget build(BuildContext context) {
-    
+    //this.widget.homePresenter.getTestAuth();
     final List<Widget> widgetsChildren = [
       ProfileComponent(user),
-      Text("hi"),
+      PostComponent(),
       Text("data")
     ];
-   
+
     return new Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(canvasColor: Colors.blueAccent, primaryColor: Colors.white),
+        data: Theme.of(context).copyWith(
+            canvasColor: Colors.blueAccent, primaryColor: Colors.white),
         child: BottomNavigationBar(
-            onTap: onTapTapped,
-            currentIndex: indexTap,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search), title: Text("")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text("")),
-            ]),
+          onTap: onTapTapped,
+          currentIndex: indexTap,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
+            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("")),
+            BottomNavigationBarItem(icon: Icon(Icons.person), title: Text("")),
+          ],
+        ),
       ),
     );
   }
@@ -84,8 +84,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
   @override
   void onCompleteProfile(User _user) {
     setState(() {
-      user = _user;
-      debugPrint("Screen : User ${user.getUsername}");
+      this.user = _user;
     });
   }
 
@@ -96,7 +95,6 @@ class HomeState extends State<HomeRoute> implements HomeView {
 
   void initPresenter() {
     this.widget.homePresenter.homeView = this;
-    this.widget.homePresenter.start();
     this.widget.homePresenter.getUser();
   }
 }
