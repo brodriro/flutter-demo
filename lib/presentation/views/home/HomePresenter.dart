@@ -11,20 +11,11 @@ class HomePresenter {
     this.userUseCase = Injector.inject().resolve<UserUseCase>();
   }
 
-  void start() {
-    }
-
-  void getUser() {
-    this.userUseCase.getUser()
-    .catchError((onError)=>{ this.homeView.onNetworkError() })
-    .then((_user) => this.homeView.onCompleteProfile(_user) );
-  }
+  void start() {}
 
   void getTestAuth() {
-     this.userUseCase.testAuth()
-    .catchError((onError)=> {this.homeView.onNetworkError()})
-    .then((_response) => debugPrint("Response on Presenter => $_response"));
- 
+    this.userUseCase.testAuth()
+      .catchError((onError) => {this.homeView.onNetworkError()})
+      .then((_response) => debugPrint("Response on Presenter => $_response"));
   }
-
 }

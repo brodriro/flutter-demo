@@ -11,10 +11,7 @@ class CloudUserRepository implements UserRepositoryRemote {
   Client _client;
   HttpAuth _httpAuth;
   
-  CloudUserRepository(this._client, this._httpAuth) {
-    _client = Injector.inject().resolve<Client>();
-    _httpAuth = new HttpAuth(); //Injector.inject().resolve<HttpAuth>();
-  }
+  CloudUserRepository(this._client, this._httpAuth);
 
   @override
   Future<User> getUser() async {

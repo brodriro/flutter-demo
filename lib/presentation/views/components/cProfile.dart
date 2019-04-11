@@ -48,8 +48,8 @@ class ProfileComponent extends StatelessWidget {
           topLeft: Radius.circular(90),
         )),
         child: Container(
-          height: 150,
-          padding: EdgeInsets.all(15),
+          height: 140,
+          padding: EdgeInsets.all(10),
           child: Row(
             children: <Widget>[
               Expanded(

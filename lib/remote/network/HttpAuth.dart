@@ -51,13 +51,16 @@ class HttpAuth {
 
   Future _loadContext() async {
   
-    ByteData certificateCrt =
+    ByteData certificate =
         await rootBundle.load('assets/certificates/client.p12');
 
     this._context = SecurityContext.defaultContext;
-
-    this._context.useCertificateChainBytes(certificateCrt.buffer.asUint8List(), password: this._authPass);
-    this._context.usePrivateKeyBytes(certificateCrt.buffer.asUint8List(),password: this._authPass);
+    
+    //this._context.setTrustedCertificatesBytes(certificate.buffer.asUint8List());
+   // this._context.setClientAuthoritiesBytes(certificate.buffer.asUint8List(), password: this._authPass);
+    //this._context.setTrustedCertificatesBytes(certificate.buffer.asUint8List());
+    this._context.useCertificateChainBytes(certificate.buffer.asUint8List(), password: this._authPass);
+    this._context.usePrivateKeyBytes(certificate.buffer.asUint8List(),password: this._authPass);
   }
 
   static Future<String> parseBody(HttpClientResponse response) async {
