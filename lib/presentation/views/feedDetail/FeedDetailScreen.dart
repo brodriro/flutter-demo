@@ -9,7 +9,7 @@ class FeedDetailScreen extends StatefulWidget {
   final Post post;
   FeedDetailPresenter feedDetailPresenter;
 
-  FeedDetailScreen({Key key, @required this.post}) : super(key: key) {
+  FeedDetailScreen({ @required this.post}) {
     this.feedDetailPresenter = Injector.inject().resolve<FeedDetailPresenter>();
   }
 
@@ -121,15 +121,13 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   }
 
   void onSendInputMessage() {
-    debugPrint("onSendMessage => ${inputMessageController.text}");
-    this.widget.feedDetailPresenter.onInputSendMessage(inputMessageController.text);
+    this.widget.feedDetailPresenter.onInputSendMessage(inputMessageController.text.toString());
   }
 
   @override
   void initState() {
-    this.widget.feedDetailPresenter.start(this);
-    // TODO: implement initState
     super.initState();
+    this.widget.feedDetailPresenter.start(this);
   }
 
   @override
@@ -139,17 +137,19 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
     super.dispose();
   }
 
+  
+
+  @override
+  void onSendMessage(String message) {
+    // TODO: implement onSendMessage
+  }
+
   @override
   void addComment(Comment comment) {
     debugPrint("AddComment receiver : ${comment.getComment}");
     setState(() {
      commentList.add(comment);
     });
-    // TODO: implement updateList
-  }
-
-  @override
-  void onSendMessage(String message) {
-    // TODO: implement onSendMessage
+    // TODO: implement addComment
   }
 }

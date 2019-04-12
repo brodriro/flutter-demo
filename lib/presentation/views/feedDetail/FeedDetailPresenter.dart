@@ -25,7 +25,7 @@ class FeedDetailPresenter {
     if (message.trim().toString().isEmpty) return;
     Comment comment = new Comment(currentUser.getId, currentUser.getUsername,
         currentUser.getImage, message);
-    
+    debugPrint("new comment => ${comment.getComment}");
     this.feedDetailView.addComment(comment);
   }
 }
