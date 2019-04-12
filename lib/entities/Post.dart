@@ -21,11 +21,13 @@ class Post {
 class Comment {
   int _userId;
   String _userImage;
+  String _username;
   String _comment;
 
-  Comment(this._userId, this._userImage, this._comment);
+  Comment(this._userId, this._username, this._userImage, this._comment);
 
   int get getUserId => this._userId;
   String get getUserImage => this._userImage;
   String get getComment => this._comment;
+  String get getUsername => this._username;
 }

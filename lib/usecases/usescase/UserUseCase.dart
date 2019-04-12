@@ -16,4 +16,6 @@ class UserUseCase {
   Future<String> testAuth() async {
     return await this.userRepositoryRemote.getTestAuth();
   }
+
+  User get getCurrentUser => this.user; 
 }

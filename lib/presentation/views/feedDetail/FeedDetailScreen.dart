@@ -122,14 +122,16 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
 
   void onSendInputMessage() {
     debugPrint("onSendMessage => ${inputMessageController.text}");
+    this.widget.feedDetailPresenter.onInputSendMessage(inputMessageController.text);
   }
 
-@override
+  @override
   void initState() {
     this.widget.feedDetailPresenter.start(this);
     // TODO: implement initState
     super.initState();
   }
+
   @override
   void dispose() {
     inputMessageController.dispose();
@@ -138,7 +140,11 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   }
 
   @override
-  void updateList(Comment comment) {
+  void addComment(Comment comment) {
+    debugPrint("AddComment receiver : ${comment.getComment}");
+    setState(() {
+     commentList.add(comment);
+    });
     // TODO: implement updateList
   }
 

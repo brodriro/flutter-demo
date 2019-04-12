@@ -12,6 +12,7 @@ String userEntityToJson(UserEntity data) {
 }
 
 class UserEntity {
+  int id;
   String username;
   String name;
   String lastname;
@@ -23,6 +24,7 @@ class UserEntity {
   SocialEntity socialEntity;
 
   UserEntity({
+    this.id,
     this.username,
     this.name,
     this.lastname,
@@ -35,6 +37,7 @@ class UserEntity {
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
+        id: json["id"],
         username: json["username"],
         name: json["name"],
         lastname: json["lastname"],
@@ -47,6 +50,7 @@ class UserEntity {
       );
 
   Map<String, dynamic> toJson() => {
+        "id":id,
         "username": username,
         "name": name,
         "lastname": lastname,
@@ -60,6 +64,7 @@ class UserEntity {
 
   static User toUser(UserEntity userEntity) {
     return new User(
+        userEntity.id,
         userEntity.username,
         userEntity.name,
         userEntity.lastname,

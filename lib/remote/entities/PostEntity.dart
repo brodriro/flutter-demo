@@ -69,22 +69,26 @@ class PostEntity {
 
 class CommentEntity {
   int userId;
+  String username;
   String userImage;
   String comment;
 
   CommentEntity({
     this.userId,
+    this.username,
     this.userImage,
     this.comment,
   });
   factory CommentEntity.fromJson(Map<String, dynamic> json) =>
       new CommentEntity(
         userId: json["user_id"],
+        username: json["username"],
         userImage: json["user_image"],
         comment: json["comment"],
       );
   Map<String, dynamic> toJson() => {
         "user_id": userId,
+        "username":username,
         "user_image": userImage,
         "comment": comment,
       };
@@ -98,6 +102,6 @@ class CommentEntity {
   }
 
   static Comment toComment(CommentEntity comment) {
-    return new Comment(comment.userId, comment.userImage, comment.comment);
+    return new Comment(comment.userId,comment.username, comment.userImage, comment.comment);
   }
 }
