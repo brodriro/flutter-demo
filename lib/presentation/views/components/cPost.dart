@@ -1,23 +1,30 @@
+import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
+import 'package:base_flutter/presentation/views/feedDetail/FeedDetailScreen.dart';
 import 'package:flutter/material.dart';
 
 class PostComponent extends StatelessWidget {
+  Post post;
+
+  PostComponent(this.post);
+
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    this.context = context;
     return cardPost();
   }
 
   Widget cardPost() {
     return Card(
-      margin: EdgeInsets.only(left: 16, right: 16, top: 32),
+      margin: EdgeInsets.only(top: 32),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          headerCard(null, "Demian Dark"),
-          bodyCard('assets/images/default_post_image.jpg',
-              "A card is a sheet of Material used to represent some related information, for example an album, a geographical location, a meal, contact details, etc."),
+          headerCard(null, post.getUserName),
+          bodyCard(post.getImage, post.getBody),
           separator(),
-          footerCard("15"),
+          footerCard(post.getLikes.toString()),
         ],
       ),
     );
@@ -28,25 +35,7 @@ class PostComponent extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: (image == null)
-                      ? AssetImage("assets/images/avatar_default.jpg")
-                      : NetworkImage(image),
-                ),
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 1),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: Colors.black38,
-                      blurRadius: 2.0,
-                      offset: Offset(0.0, 3.0))
-                ]),
-          ),
+          RoundedImageComponent(network: image),
           Container(
             margin: EdgeInsets.only(left: 10),
             child: Text(
@@ -64,9 +53,12 @@ class PostComponent extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Image(
-            image: AssetImage(image),
-            height: 150,
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(image), fit: BoxFit.cover),
+            ),
           ),
           Container(
             padding: EdgeInsets.all(10),
@@ -95,6 +87,7 @@ class PostComponent extends StatelessWidget {
             ),
           ),
           RaisedButton(
+            onPressed: () => onClickComment(this.context),
             disabledColor: Colors.transparent,
             child: Row(
               children: <Widget>[
@@ -121,6 +114,15 @@ class PostComponent extends StatelessWidget {
     return Container(
       height: 1,
       color: Colors.black26,
+    );
+  }
+
+  void onClickComment(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FeedDetailScreen(post: post),
+      ),
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:base_flutter/entities/User.dart';
 class UserUseCase {
   UserRepositoryRemote userRepositoryRemote;
 
+  User user;
+
   UserUseCase(this.userRepositoryRemote);
 
 

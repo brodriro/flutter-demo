@@ -18,6 +18,9 @@ class ProfilePresenter {
     debugPrint("Profile Presenter GetUser()");
     this.userUseCase.getUser()
       .catchError((onError) => {this.view.onNetworkError()})
-      .then((_user) => this.view.onCompleteProfile(_user));
+      .then((_user) { 
+        this.view.onCompleteProfile(_user);
+        this.userUseCase.user = _user;
+      });
   }
 }

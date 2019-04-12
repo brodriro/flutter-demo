@@ -1,29 +1,31 @@
 class Post {
-  String _id;
-  String _userId;
+  int _id;
+  int _userId;
+  String _username;
   String _body;
   String _image;
-  String _likes;
+  int _likes;
   List<Comment> _comment;
 
-  Post(this._id, this._userId, this._body, this._image, this._likes, this._comment);
+  Post(this._id, this._userId, this._username, this._body, this._image, this._likes, this._comment);
 
-  String get getId => this._id;
-  String get getUserId => this._userId;
+  int get getId => this._id;
+  int get getUserId => this._userId;
+  String get getUserName => this._username;
   String get getBody => this._body;
   String get getImage => this._image;
-  String get getLikes => this._likes;
+  int get getLikes => this._likes;
   List<Comment> get getComments => this._comment;
 }
 
 class Comment {
-  String _userId;
+  int _userId;
   String _userImage;
   String _comment;
 
   Comment(this._userId, this._userImage, this._comment);
 
-  String get getUserId => this._userId;
+  int get getUserId => this._userId;
   String get getUserImage => this._userImage;
   String get getComment => this._comment;
 }

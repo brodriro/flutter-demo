@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class FeedScreen extends StatefulWidget {
   FeedPresenter feedPresenter;
 
-  FeedScreen(){
+  FeedScreen() {
     this.feedPresenter = Injector.inject().resolve<FeedPresenter>();
   }
 
@@ -19,35 +19,31 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreen extends State<FeedScreen> implements FeedView {
-  List<String> mListNames = new List<String>();
+  List<Post> posts = new List<Post>();
 
   @override
   Widget build(BuildContext context) {
-    return PostComponent();
+    return _buildPost();
   }
 
-  Widget _buildSuggestions() {
+  Widget _buildPost() {
     return new ListView.builder(
-        itemCount: mListNames.length,
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (BuildContext _context, int i) {
-          return (mListNames.length == 0) ? null : _buildRow(mListNames[i]);
-        });
+      itemCount: posts.length,
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (BuildContext _context, int i) {
+        return (posts.length == 0) ? null : _buildRow(posts[i]);
+      },
+    );
   }
 
-  Widget _buildRow(String pair) {
-    return new ListTile(
-      title: new Text(
-        pair,
-      ),
-    );
+  Widget _buildRow(Post post) {
+    return PostComponent(post);
   }
 
   @override
   void initState() {
     super.initState();
     initPresenter();
-    
   }
 
   void initPresenter() {
@@ -56,11 +52,17 @@ class _FeedScreen extends State<FeedScreen> implements FeedView {
 
   @override
   void onFeedComplete(List<Post> posts) {
-    debugPrint("FeedScreen - post size : ${posts}");
+    debugPrint("onFeedComplete");
+    setState(() => this.posts = posts);
   }
 
   @override
   void onNetworkError() {
-    debugPrint("FeedScreen - onNetorkError");
+    debugPrint("onNetorkError");
+  }
+
+  @override
+  void onLoading() {
+    debugPrint("onLoadingData");
   }
 }

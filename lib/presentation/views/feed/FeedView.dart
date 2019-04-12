@@ -6,5 +6,7 @@ abstract class FeedView {
 
   void onFeedComplete(List<Post> posts);
 
+  void onLoading();
+  
   void onNetworkError();
 }
