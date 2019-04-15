@@ -13,6 +13,10 @@ class UserUseCase {
     return await this.userRepositoryRemote.getUser();
   }
 
+  Future<List<User>> getFriends() async {
+    return await this.userRepositoryRemote.getFriends();
+  }
+
   Future<String> testAuth() async {
     return await this.userRepositoryRemote.getTestAuth();
   }

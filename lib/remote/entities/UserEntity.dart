@@ -1,6 +1,11 @@
 import 'dart:convert';
 import 'package:base_flutter/entities/User.dart';
 
+List<UserEntity> listUserEntityFromJson(String str) {
+  final jsonData = json.decode(str);
+  return new List<UserEntity>.from(jsonData.map((x) => UserEntity.fromJson(x)));
+}
+
 UserEntity userEntityFromJson(String str) {
   final jsonData = json.decode(str);
   return UserEntity.fromJson(jsonData);
@@ -74,6 +79,15 @@ class UserEntity {
         userEntity.email,
         userEntity.location,
         SocialEntity.toSocial(userEntity.socialEntity));
+  }
+
+  static List<User> toList(List<UserEntity> list) {
+    List<User> friendsList = new List();
+
+    for (UserEntity row in list) {
+      friendsList.add(toUser(row));
+    }
+    return friendsList;
   }
 }
 

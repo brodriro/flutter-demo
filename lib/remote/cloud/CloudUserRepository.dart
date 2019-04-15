@@ -33,4 +33,15 @@ class CloudUserRepository implements UserRepositoryRemote {
     var responseBody = await HttpAuth.parseBody(response);
     return responseBody;
   }
+
+  @override
+  Future<List<User>> getFriends() async{
+    String url = ApiURL.friends;
+    List<UserEntity> userEntity;
+
+    final response = await _client.get(url);
+    userEntity = listUserEntityFromJson(response.body);
+
+    return UserEntity.toList(userEntity);
+  }
 }
