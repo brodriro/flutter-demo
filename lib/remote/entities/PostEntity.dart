@@ -15,6 +15,7 @@ class PostEntity {
   int id;
   int userId;
   String username;
+  String userImage;
   String body;
   String image;
   int likes;
@@ -24,6 +25,7 @@ class PostEntity {
     this.id,
     this.userId,
     this.username,
+    this.userImage,
     this.body,
     this.image,
     this.likes,
@@ -35,6 +37,7 @@ class PostEntity {
         id: json["id"],
         userId: json["user_id"],
         username: json["username"],
+        userImage: json["user_image"],
         body: json["body"],
         image: json["image"],
         likes: json["likes"],
@@ -46,6 +49,7 @@ class PostEntity {
         "id": id,
         "user_id": userId,
         "username": username,
+        "user_image": userImage,
         "body": body,
         "image": image,
         "likes": likes,
@@ -62,7 +66,7 @@ class PostEntity {
   }
 
   static Post _toPost(PostEntity p) {
-    return new Post(p.id, p.userId, p.username, p.body, p.image, p.likes,
+    return new Post(p.id, p.userId, p.username,p.userImage, p.body, p.image, p.likes,
         CommentEntity.toComments(p.comment));
   }
 }

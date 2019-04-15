@@ -21,7 +21,7 @@ class PostComponent extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          headerCard(null, post.getUserName),
+          headerCard(post.getUserImage, post.getUserName),
           bodyCard(post.getImage, post.getBody),
           separator(),
           footerCard(post.getLikes.toString()),
