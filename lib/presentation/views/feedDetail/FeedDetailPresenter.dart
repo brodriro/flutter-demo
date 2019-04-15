@@ -16,16 +16,15 @@ class FeedDetailPresenter {
     this.currentUser = this.userUseCase.getCurrentUser;
   }
 
-  void start(FeedDetailView view) {
+  void start(FeedDetailView view){
     this.feedDetailView = view;
-    debugPrint("FeedDetailView initializated => User: ${currentUser.getName}");
   }
 
   void onInputSendMessage(String message) {
     if (message.trim().toString().isEmpty) return;
     Comment comment = new Comment(currentUser.getId, currentUser.getUsername,
         currentUser.getImage, message);
-    debugPrint("new comment => ${comment.getComment}");
+   
     this.feedDetailView.addComment(comment);
   }
 }

@@ -6,22 +6,17 @@ import 'package:base_flutter/presentation/views/profile/ProfileView.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfilePresenter profilePresenter;
-
-  ProfileScreen() {
-    this.profilePresenter = Injector.inject().resolve<ProfilePresenter>();
-  }
-
+  
+  ProfileScreen();
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ProfileScreen();
   }
 }
 
 class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
-  
+  ProfilePresenter profilePresenter = Injector.inject().resolve<ProfilePresenter>();
   User user;
 
   @override
@@ -36,8 +31,8 @@ class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
   }
 
   void initPresenter() {
-    this.widget.profilePresenter.view = this;
-    this.widget.profilePresenter.getUser();
+    this.profilePresenter.view = this;
+    this.profilePresenter.getUser();
   }
 
   @override

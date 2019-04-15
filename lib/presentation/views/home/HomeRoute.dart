@@ -6,18 +6,15 @@ import 'HomePresenter.dart';
 import 'HomeView.dart';
 
 class HomeRoute extends StatefulWidget {
-  HomePresenter homePresenter;
-
-  HomeRoute() {
-    this.homePresenter = Injector.inject().resolve<HomePresenter>();
-  }
+  HomeRoute();
 
   @override
   HomeState createState() => new HomeState();
 }
 
 class HomeState extends State<HomeRoute> implements HomeView {
- 
+  HomePresenter homePresenter = Injector.inject().resolve<HomePresenter>();
+
   int indexTap = 0;
 
   void onTapTapped(int index) {
@@ -50,8 +47,10 @@ class HomeState extends State<HomeRoute> implements HomeView {
           onTap: onTapTapped,
           currentIndex: indexTap,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline), title: Text("")),
-            BottomNavigationBarItem(icon: Icon(Icons.insert_comment), title: Text("")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline), title: Text("")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.insert_comment), title: Text("")),
             BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("")),
           ],
         ),
@@ -65,6 +64,6 @@ class HomeState extends State<HomeRoute> implements HomeView {
   }
 
   void initPresenter() {
-    this.widget.homePresenter.homeView = this;
+    this.homePresenter.homeView = this;
   }
 }

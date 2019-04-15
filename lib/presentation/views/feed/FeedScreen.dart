@@ -6,11 +6,8 @@ import 'package:base_flutter/presentation/views/feed/FeedView.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
-  FeedPresenter feedPresenter;
 
-  FeedScreen() {
-    this.feedPresenter = Injector.inject().resolve<FeedPresenter>();
-  }
+  FeedScreen();
 
   @override
   State<StatefulWidget> createState() {
@@ -19,6 +16,7 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreen extends State<FeedScreen> implements FeedView {
+  FeedPresenter feedPresenter = Injector.inject().resolve<FeedPresenter>();
   List<Post> posts = new List<Post>();
 
   @override
@@ -47,7 +45,7 @@ class _FeedScreen extends State<FeedScreen> implements FeedView {
   }
 
   void initPresenter() {
-    this.widget.feedPresenter.start(this);
+    this.feedPresenter.start(this);
   }
 
   @override
