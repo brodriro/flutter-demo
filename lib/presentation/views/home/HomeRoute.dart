@@ -1,4 +1,5 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/Utils.dart';
 import 'package:base_flutter/presentation/views/feed/FeedScreen.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileScreen.dart';
 import 'package:base_flutter/presentation/views/users/UserScreen.dart';
@@ -43,7 +44,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-            canvasColor: Colors.blueAccent, primaryColor: Colors.white),
+            canvasColor: ThemeColor.primaryColor, primaryColor: Colors.white),
         child: BottomNavigationBar(
           onTap: onTapTapped,
           currentIndex: indexTap,
