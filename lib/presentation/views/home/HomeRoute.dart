@@ -1,6 +1,7 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/feed/FeedScreen.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileScreen.dart';
+import 'package:base_flutter/presentation/views/users/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
@@ -35,7 +36,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
     final List<Widget> widgetsChildren = [
       ProfileScreen(),
       FeedScreen(),
-      Text("data")
+      UserScreen()
     ];
 
     return new Scaffold(

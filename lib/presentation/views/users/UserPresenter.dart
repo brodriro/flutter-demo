@@ -14,12 +14,14 @@ class UserPresenter {
 
   void star(UserView view) {
     this.view = view;
+
+    this.getFriends();
   }
 
   void getFriends() {
     this.userUserCase.getFriends()
     .then((list) => this.view.onCompleteData(list),
-    onError: () => this.view.onNetworkError());
+    onError: (e) => this.view.onNetworkError());
   }
 
   

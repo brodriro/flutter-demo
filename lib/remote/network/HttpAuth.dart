@@ -56,9 +56,6 @@ class HttpAuth {
 
     this._context = SecurityContext.defaultContext;
     
-    //this._context.setTrustedCertificatesBytes(certificate.buffer.asUint8List());
-   // this._context.setClientAuthoritiesBytes(certificate.buffer.asUint8List(), password: this._authPass);
-    //this._context.setTrustedCertificatesBytes(certificate.buffer.asUint8List());
     this._context.useCertificateChainBytes(certificate.buffer.asUint8List(), password: this._authPass);
     this._context.usePrivateKeyBytes(certificate.buffer.asUint8List(),password: this._authPass);
   }
