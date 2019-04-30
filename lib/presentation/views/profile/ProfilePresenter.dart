@@ -3,7 +3,6 @@ import 'package:base_flutter/presentation/views/profile/ProfileView.dart';
 import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
 import 'package:flutter/foundation.dart';
 
-
 class ProfilePresenter {
   ProfileView view;
   UserUseCase userUseCase;
@@ -15,12 +14,9 @@ class ProfilePresenter {
   void start() {}
 
   void getUser() {
-    debugPrint("Profile Presenter GetUser()");
-    this.userUseCase.getUser()
-      .catchError((onError) => {this.view.onNetworkError()})
-      .then((_user) { 
-        this.view.onCompleteProfile(_user);
-        this.userUseCase.user = _user;
-      });
+    this.userUseCase.getUser().then((_user) {
+      this.view.onCompleteProfile(_user);
+      this.userUseCase.user = _user;
+    }, onError: (e) => {this.view.onNetworkError()});
   }
 }

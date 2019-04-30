@@ -11,7 +11,9 @@ class HomePresenter {
     this.userUseCase = Injector.inject().resolve<UserUseCase>();
   }
 
-  void start() {}
+  void start(HomeView view) {
+    this.homeView = view;
+  }
 
   void getTestAuth() {
     this.userUseCase.testAuth()

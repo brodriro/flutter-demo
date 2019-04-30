@@ -66,6 +66,6 @@ class HomeState extends State<HomeRoute> implements HomeView {
   }
 
   void initPresenter() {
-    this.homePresenter.homeView = this;
+    this.homePresenter.start(this);
   }
 }
