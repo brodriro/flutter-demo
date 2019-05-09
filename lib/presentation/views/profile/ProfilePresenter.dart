@@ -11,7 +11,9 @@ class ProfilePresenter {
     this.userUseCase = Injector.inject().resolve<UserUseCase>();
   }
 
-  void start() {}
+  void start(ProfileView _view) {
+    this.view = _view;
+  }
 
   void getUser() {
     this.userUseCase.getUser().then((_user) {

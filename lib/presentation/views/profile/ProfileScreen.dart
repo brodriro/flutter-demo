@@ -17,8 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
-  ProfilePresenter profilePresenter =
-      Injector.inject().resolve<ProfilePresenter>();
+  ProfilePresenter profilePresenter = Injector.inject().resolve<ProfilePresenter>();
   User user;
 
   @override
@@ -33,7 +32,7 @@ class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
   }
 
   void initPresenter() {
-    this.profilePresenter.view = this;
+    this.profilePresenter.start(this);
     this.profilePresenter.getUser();
   }
 
