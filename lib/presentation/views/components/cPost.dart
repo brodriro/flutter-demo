@@ -88,6 +88,7 @@ class PostComponent extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () => onClickComment(this.context),
+            color: Colors.grey[100],
             disabledColor: Colors.transparent,
             child: Row(
               children: <Widget>[

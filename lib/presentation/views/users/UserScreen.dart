@@ -1,5 +1,6 @@
 import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
 import 'package:base_flutter/presentation/views/components/RowUserProfile.dart';
 import 'package:base_flutter/presentation/views/users/UserPresenter.dart';
 import 'package:base_flutter/presentation/views/users/UserView.dart';
@@ -14,7 +15,7 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreen extends State<UserScreen> implements UserView {
   UserPresenter userPresenter = Injector.inject().resolve<UserPresenter>();
-  List<User> friendsList = new List();
+  List<User> friendsList = null;
 
   @override
   void initState() {
@@ -24,7 +25,7 @@ class _UserScreen extends State<UserScreen> implements UserView {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return (friendsList == null ) ? CircularProgressComponent() :  Container(
         margin: EdgeInsets.only(top: 30),
         child: ListView.builder(
           itemCount: this.friendsList.length,
@@ -40,6 +41,7 @@ class _UserScreen extends State<UserScreen> implements UserView {
   @override
   void onCompleteData(List<User> users) {
     setState(() {
+      if(this.friendsList == null) this.friendsList = new List();
      this.friendsList = users; 
     });
   }

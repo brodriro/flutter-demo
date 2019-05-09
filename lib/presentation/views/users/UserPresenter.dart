@@ -14,7 +14,6 @@ class UserPresenter {
 
   void star(UserView view) {
     this.view = view;
-
     this.getFriends();
   }
 
