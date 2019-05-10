@@ -26,7 +26,7 @@ class HttpAuth {
     return await request.close();
   }
 
-  Future<HttpClientResponse> postRequest(String url, Map body) async {
+  Future<HttpClientResponse> postRequest(String url, Map<String,String> body) async {
 
     await this._loadContext();
 

@@ -1,5 +1,5 @@
-import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
 import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
 
 class UserUseCase {
   UserRepositoryRemote userRepositoryRemote;
@@ -7,7 +7,6 @@ class UserUseCase {
   User user;
 
   UserUseCase(this.userRepositoryRemote);
-
 
   Future<User> getUser() async {
     return await this.userRepositoryRemote.getUser();
@@ -21,5 +20,9 @@ class UserUseCase {
     return await this.userRepositoryRemote.getTestAuth();
   }
 
-  User get getCurrentUser => this.user; 
+  Future<Object> login(String user, String password) async {
+    return await this.userRepositoryRemote.login(user, password);
+  }
+
+  User get getCurrentUser => this.user;
 }
