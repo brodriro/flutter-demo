@@ -5,5 +5,7 @@ abstract class UserRepositoryRemote {
   
   Future<User> getUser();
 
+  Future<List<User>> getFriends();
+
   Future<String> getTestAuth();
 }

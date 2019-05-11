@@ -7,17 +7,16 @@ import 'package:flutter/material.dart';
 
 class FeedDetailScreen extends StatefulWidget {
   final Post post;
-  FeedDetailPresenter feedDetailPresenter;
+  
 
-  FeedDetailScreen({Key key, @required this.post}) : super(key: key) {
-    this.feedDetailPresenter = Injector.inject().resolve<FeedDetailPresenter>();
-  }
+  FeedDetailScreen({ @required this.post});
 
   @override
   _FeedDetailScreenState createState() => _FeedDetailScreenState();
 }
 
-class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDetailView {
+class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDetailView{
+  FeedDetailPresenter feedDetailPresenter = Injector.inject().resolve<FeedDetailPresenter>();
   List<Comment> commentList;
 
   final inputMessageController = new TextEditingController();
@@ -121,29 +120,26 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   }
 
   void onSendInputMessage() {
-    debugPrint("onSendMessage => ${inputMessageController.text}");
+    this.feedDetailPresenter.onInputSendMessage(inputMessageController.text.toString());
+    this.inputMessageController.clear();
   }
 
-@override
+  @override
   void initState() {
-    this.widget.feedDetailPresenter.start(this);
-    // TODO: implement initState
     super.initState();
+    this.feedDetailPresenter.start(this);
   }
+
   @override
   void dispose() {
     inputMessageController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
-  void updateList(Comment comment) {
-    // TODO: implement updateList
-  }
-
-  @override
-  void onSendMessage(String message) {
-    // TODO: implement onSendMessage
+  void addComment(Comment comment) {
+    setState(() {
+     this.commentList.add(comment); 
+    });
   }
 }

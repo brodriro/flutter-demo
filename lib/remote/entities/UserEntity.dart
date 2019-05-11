@@ -1,6 +1,11 @@
 import 'dart:convert';
 import 'package:base_flutter/entities/User.dart';
 
+List<UserEntity> listUserEntityFromJson(String str) {
+  final jsonData = json.decode(str);
+  return new List<UserEntity>.from(jsonData.map((x) => UserEntity.fromJson(x)));
+}
+
 UserEntity userEntityFromJson(String str) {
   final jsonData = json.decode(str);
   return UserEntity.fromJson(jsonData);
@@ -12,6 +17,7 @@ String userEntityToJson(UserEntity data) {
 }
 
 class UserEntity {
+  int id;
   String username;
   String name;
   String lastname;
@@ -23,6 +29,7 @@ class UserEntity {
   SocialEntity socialEntity;
 
   UserEntity({
+    this.id,
     this.username,
     this.name,
     this.lastname,
@@ -35,6 +42,7 @@ class UserEntity {
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
+        id: json["id"],
         username: json["username"],
         name: json["name"],
         lastname: json["lastname"],
@@ -47,6 +55,7 @@ class UserEntity {
       );
 
   Map<String, dynamic> toJson() => {
+        "id":id,
         "username": username,
         "name": name,
         "lastname": lastname,
@@ -60,6 +69,7 @@ class UserEntity {
 
   static User toUser(UserEntity userEntity) {
     return new User(
+        userEntity.id,
         userEntity.username,
         userEntity.name,
         userEntity.lastname,
@@ -69,6 +79,15 @@ class UserEntity {
         userEntity.email,
         userEntity.location,
         SocialEntity.toSocial(userEntity.socialEntity));
+  }
+
+  static List<User> toList(List<UserEntity> list) {
+    List<User> friendsList = new List();
+
+    for (UserEntity row in list) {
+      friendsList.add(toUser(row));
+    }
+    return friendsList;
   }
 }
 

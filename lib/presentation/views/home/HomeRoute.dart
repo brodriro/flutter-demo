@@ -1,23 +1,22 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/Utils.dart';
 import 'package:base_flutter/presentation/views/feed/FeedScreen.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileScreen.dart';
+import 'package:base_flutter/presentation/views/users/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'HomePresenter.dart';
 import 'HomeView.dart';
 
 class HomeRoute extends StatefulWidget {
-  HomePresenter homePresenter;
-
-  HomeRoute() {
-    this.homePresenter = Injector.inject().resolve<HomePresenter>();
-  }
+  HomeRoute();
 
   @override
   HomeState createState() => new HomeState();
 }
 
 class HomeState extends State<HomeRoute> implements HomeView {
- 
+  HomePresenter homePresenter = Injector.inject().resolve<HomePresenter>();
+
   int indexTap = 0;
 
   void onTapTapped(int index) {
@@ -38,20 +37,22 @@ class HomeState extends State<HomeRoute> implements HomeView {
     final List<Widget> widgetsChildren = [
       ProfileScreen(),
       FeedScreen(),
-      Text("data")
+      UserScreen()
     ];
 
     return new Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-            canvasColor: Colors.blueAccent, primaryColor: Colors.white),
+            canvasColor: ThemeColor.primaryColor, primaryColor: Colors.white),
         child: BottomNavigationBar(
           onTap: onTapTapped,
           currentIndex: indexTap,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline), title: Text("")),
-            BottomNavigationBarItem(icon: Icon(Icons.insert_comment), title: Text("")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline), title: Text("")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.insert_comment), title: Text("")),
             BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("")),
           ],
         ),
@@ -65,6 +66,6 @@ class HomeState extends State<HomeRoute> implements HomeView {
   }
 
   void initPresenter() {
-    this.widget.homePresenter.homeView = this;
+    this.homePresenter.start(this);
   }
 }

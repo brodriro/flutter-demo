@@ -1,16 +1,13 @@
 import 'package:base_flutter/entities/Post.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
 import 'package:base_flutter/presentation/views/components/cPost.dart';
 import 'package:base_flutter/presentation/views/feed/FeedPresenter.dart';
 import 'package:base_flutter/presentation/views/feed/FeedView.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
-  FeedPresenter feedPresenter;
-
-  FeedScreen() {
-    this.feedPresenter = Injector.inject().resolve<FeedPresenter>();
-  }
+  FeedScreen();
 
   @override
   State<StatefulWidget> createState() {
@@ -19,11 +16,12 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreen extends State<FeedScreen> implements FeedView {
-  List<Post> posts = new List<Post>();
+  FeedPresenter feedPresenter = Injector.inject().resolve<FeedPresenter>();
+  List<Post> posts = null;
 
   @override
   Widget build(BuildContext context) {
-    return _buildPost();
+    return (posts == null) ? CircularProgressComponent() : _buildPost();
   }
 
   Widget _buildPost() {
@@ -47,13 +45,16 @@ class _FeedScreen extends State<FeedScreen> implements FeedView {
   }
 
   void initPresenter() {
-    this.widget.feedPresenter.start(this);
+    this.feedPresenter.start(this);
   }
 
   @override
   void onFeedComplete(List<Post> posts) {
     debugPrint("onFeedComplete");
-    setState(() => this.posts = posts);
+    setState(() {
+      if (this.posts == null) this.posts = new List();
+      this.posts = posts;
+    });
   }
 
   @override

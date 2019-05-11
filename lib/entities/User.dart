@@ -1,4 +1,5 @@
 class User {
+  int _id;
   String _username;
   String _name;
   String _lastname;
@@ -10,6 +11,7 @@ class User {
   Social _social;
 
   User(
+    this._id,
     this._username,
     this._name,
     this._lastname,
@@ -20,7 +22,7 @@ class User {
     this._location,
     this._social,
   );
-
+  int get getId => this._id;
   String get getUsername => this._username;
   String get getName => this._name;
   String get getLastName => this._lastname;

@@ -2,6 +2,7 @@ import 'package:base_flutter/presentation/views/feed/FeedPresenter.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
 import 'package:base_flutter/presentation/views/home/HomePresenter.dart';
 import 'package:base_flutter/presentation/views/profile/ProfilePresenter.dart';
+import 'package:base_flutter/presentation/views/users/UserPresenter.dart';
 import 'package:base_flutter/remote/cloud/CloudPostRepository.dart';
 import 'package:base_flutter/remote/cloud/CloudUserRepository.dart';
 import 'package:base_flutter/remote/network/HttpAuth.dart';
@@ -35,6 +36,7 @@ class Injector {
     mContainer.registerFactory((c) => new ProfilePresenter());
     mContainer.registerFactory((c) => new FeedPresenter());
     mContainer.registerFactory((c) => new FeedDetailPresenter());
+    mContainer.registerFactory((c) => new UserPresenter());
   }
   
   static Container inject() => mContainer; 

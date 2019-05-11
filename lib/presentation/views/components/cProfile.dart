@@ -37,7 +37,7 @@ class ProfileComponent extends StatelessWidget {
   Widget _header() {
     Social social = (_user != null) ? _user.getSocial : null;
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 35),
       child: Card(
         elevation: 2,
         margin: EdgeInsets.all(0),
