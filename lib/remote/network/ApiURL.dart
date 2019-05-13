@@ -7,8 +7,7 @@ class ApiURL {
   static const String userUrl = _baseURL + "/profile";
   static const String friends = _baseURL + "/users";
   static const String posts = _baseURL + "/posts";
-  static const String loginAuth = "";
 
-  static const String authURL = "";
+  static const String authURL = "https://www.codeapp.us/api.php";
 
 }

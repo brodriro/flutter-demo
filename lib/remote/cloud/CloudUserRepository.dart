@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/remote/entities/UserEntity.dart';
 import 'package:base_flutter/remote/network/ApiURL.dart';
@@ -46,14 +46,18 @@ class CloudUserRepository implements UserRepositoryRemote {
 
   @override
   Future<Object> login(String user, String password) async {
-    String url = ApiURL.loginAuth;
+    String url = ApiURL.authURL;
     Object object;
 
-    Map<String, String> body = {"user": user, "password": password};
+    Map<String, String> body = {"username": user, "password": password};
 
     HttpClientResponse response = await _httpAuth.postRequest(url, body);
 
     var responseBody = await HttpAuth.parseBody(response);
+
+    var _response = json.decode(responseBody);
+
+    if(_response["status"]["code"] != 1) throw Exception("Error Auth");
 
     object = responseBody;
     return object;

@@ -29,7 +29,6 @@ dependencies:
   
 
 dev_dependencies:
-  jaguar_retrofit_gen:
   build_runner:
   flutter_test:
     sdk: flutter

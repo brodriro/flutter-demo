@@ -1,6 +1,5 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/Utils.dart';
-import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
 import 'package:base_flutter/presentation/views/login/LoginPresenter.dart';
 import 'package:base_flutter/presentation/views/login/LoginView.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,8 +58,8 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
                     decoration: new InputDecoration(
                         border: InputBorder.none,
                         labelStyle: TextStyle(fontSize: 12),
-                        hintText: 'you@example.com',
-                        labelText: 'E-mail Address'),
+                        hintText: 'Username',
+                        labelText: 'Username'),
                   ),
                 ),
                 Container(
@@ -104,14 +103,14 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
   }
 
   String _validateEmail(String value) {
-    if (!value.contains("@")) return "Invalid email";
+    if(value.trim().isEmpty) return "Invalid Username";
 
     user = value;
     return null;
   }
 
   String _validatePassword(String value) {
-    if (value.length < 8) return 'The Password must be at least 8 characters.';
+    if (value.length < 6) return 'The Password must be at least 8 characters.';
     password = value;
     return null;
   }
@@ -126,16 +125,15 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
 
   @override
   onLoginSuccess() {
-    Navigator.pushAndRemoveUntil(
+    Navigator.pushReplacementNamed(
         context,
-        MaterialPageRoute(
-          builder: (context) => HomeRoute(),
-        ),
-        ModalRoute.withName("/"));
+        "/Home"
+    );
   }
 
   @override
   onNetworkError() {
+    debugPrint("onNetworkError");
     // TODO: implement onNetworkError
     return null;
   }

@@ -14,9 +14,8 @@ class LoginPresenter {
     this.loginView = view;
   }
 
-  void onLoginClick(String user, String password) {
-    return this.loginView.onLoginSuccess();
-    this.userUseCase.login(user, password).then(
+  void onLoginClick(String username, String password) {
+    this.userUseCase.login(username, password).then(
         (response) => {this.loginView.onLoginSuccess()},
         onError: (e) => this.loginView.onNetworkError());
   }

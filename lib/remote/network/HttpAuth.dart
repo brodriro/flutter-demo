@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class HttpAuth {
+  final String METHOD_POST = "POST";
+  final String METHOD_GET = "GET";
   String _authPass = 'everis123';
 
   SecurityContext _context;
@@ -15,11 +17,9 @@ class HttpAuth {
 
     await this._loadContext();
 
-    var method = 'GET';
-
     HttpClient client = new HttpClient(context: this._context);
     client.connectionTimeout = Duration(seconds: 5);
-    var request = await client.openUrl(method, Uri.parse(url));
+    var request = await client.openUrl(METHOD_GET, Uri.parse(url));
     request.headers
         .set(HttpHeaders.CONTENT_TYPE, 'application/x-www-form-urlencoded');
 
@@ -30,21 +30,12 @@ class HttpAuth {
 
     await this._loadContext();
 
-    var method = 'POST';
-
-    var data = '';
-    body.forEach((key, value) =>
-        {data = (data == '') ? "$key=$value" : "${data}&$key=$value"});
-
-    debugPrint("data => $data");
-
     HttpClient client = new HttpClient(context: this._context);
 
-    var request = await client.openUrl(method, Uri.parse(url));
+    var request = await client.openUrl(METHOD_POST, Uri.parse(url));
     request.headers
-        .set(HttpHeaders.CONTENT_TYPE, 'application/x-www-form-urlencoded');
-
-    request.write(data);
+        .set(HttpHeaders.CONTENT_TYPE, 'application/json');
+    request.add(utf8.encode(json.encode(body)));
 
     return await request.close();
   }
