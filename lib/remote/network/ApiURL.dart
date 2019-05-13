@@ -8,6 +8,6 @@ class ApiURL {
   static const String friends = _baseURL + "/users";
   static const String posts = _baseURL + "/posts";
 
-  static const String authURL = "";
+  static const String authURL = "https://www.codeapp.us/api.php";
 
 }

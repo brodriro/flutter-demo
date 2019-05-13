@@ -1,7 +1,8 @@
-import 'package:base_flutter/presentation/views/Utils.dart';
-import 'package:flutter/material.dart';
-import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
+import 'package:base_flutter/presentation/views/Utils.dart';
+import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
+import 'package:base_flutter/presentation/views/login/LoginScreen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -16,14 +17,17 @@ void main() {
 class DemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     return new MaterialApp(
       title: 'Demo Flutter App',
       theme: ThemeData(
-        accentColor: ThemeColor.colorAccent,
-        primaryColorDark: ThemeColor.primaryColor,
-        fontFamily: 'Raleway'),
-      home:  HomeRoute(),
+          accentColor: ThemeColor.colorAccent,
+          primaryColorDark: ThemeColor.primaryColor,
+          fontFamily: 'Raleway'),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => LoginScreen(),
+        "/Home": (context) => HomeRoute(),
+      },
     );
   }
 }

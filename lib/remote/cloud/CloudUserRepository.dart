@@ -1,16 +1,16 @@
 import 'dart:io';
-import 'package:base_flutter/presentation/di/Injector.dart';
+import 'dart:convert';
+import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/remote/entities/UserEntity.dart';
+import 'package:base_flutter/remote/network/ApiURL.dart';
 import 'package:base_flutter/remote/network/HttpAuth.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
-import 'package:base_flutter/entities/User.dart';
 import 'package:http/http.dart';
-import 'package:base_flutter/remote/network/ApiURL.dart';
 
 class CloudUserRepository implements UserRepositoryRemote {
   Client _client;
   HttpAuth _httpAuth;
-  
+
   CloudUserRepository(this._client, this._httpAuth);
 
   @override
@@ -27,15 +27,14 @@ class CloudUserRepository implements UserRepositoryRemote {
   Future<String> getTestAuth() async {
     String url = ApiURL.authURL;
 
-    HttpClientResponse response =
-        await _httpAuth.getRequest(url);
+    HttpClientResponse response = await _httpAuth.getRequest(url);
 
     var responseBody = await HttpAuth.parseBody(response);
     return responseBody;
   }
 
   @override
-  Future<List<User>> getFriends() async{
+  Future<List<User>> getFriends() async {
     String url = ApiURL.friends;
     List<UserEntity> userEntity;
 
@@ -43,5 +42,24 @@ class CloudUserRepository implements UserRepositoryRemote {
     userEntity = listUserEntityFromJson(response.body);
 
     return UserEntity.toList(userEntity);
+  }
+
+  @override
+  Future<Object> login(String user, String password) async {
+    String url = ApiURL.authURL;
+    Object object;
+
+    Map<String, String> body = {"username": user, "password": password};
+
+    HttpClientResponse response = await _httpAuth.postRequest(url, body);
+
+    var responseBody = await HttpAuth.parseBody(response);
+
+    var _response = json.decode(responseBody);
+
+    if(_response["status"]["code"] != 1) throw Exception("Error Auth");
+
+    object = responseBody;
+    return object;
   }
 }

@@ -1,13 +1,12 @@
 import 'package:base_flutter/presentation/views/feed/FeedPresenter.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
 import 'package:base_flutter/presentation/views/home/HomePresenter.dart';
+import 'package:base_flutter/presentation/views/login/LoginPresenter.dart';
 import 'package:base_flutter/presentation/views/profile/ProfilePresenter.dart';
 import 'package:base_flutter/presentation/views/users/UserPresenter.dart';
 import 'package:base_flutter/remote/cloud/CloudPostRepository.dart';
 import 'package:base_flutter/remote/cloud/CloudUserRepository.dart';
 import 'package:base_flutter/remote/network/HttpAuth.dart';
-import 'package:base_flutter/usecases/repository/post/PostRepositoryRemote.dart';
-import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
 import 'package:base_flutter/usecases/usescase/PostUseCase.dart';
 import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
 import 'package:http/http.dart';
@@ -32,6 +31,7 @@ class Injector {
 
 
     //Presenter
+    mContainer.registerFactory((c) => new LoginPresenter());
     mContainer.registerFactory((c) => new HomePresenter());
     mContainer.registerFactory((c) => new ProfilePresenter());
     mContainer.registerFactory((c) => new FeedPresenter());

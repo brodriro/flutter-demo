@@ -1,6 +1,5 @@
 import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/Utils.dart';
 import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
 import 'package:base_flutter/presentation/views/components/cProfile.dart';
 import 'package:base_flutter/presentation/views/profile/ProfilePresenter.dart';
@@ -17,8 +16,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
-  ProfilePresenter profilePresenter =
-      Injector.inject().resolve<ProfilePresenter>();
+  ProfilePresenter profilePresenter = Injector.inject().resolve<ProfilePresenter>();
   User user;
 
   @override
@@ -33,7 +31,7 @@ class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
   }
 
   void initPresenter() {
-    this.profilePresenter.view = this;
+    this.profilePresenter.start(this);
     this.profilePresenter.getUser();
   }
 
