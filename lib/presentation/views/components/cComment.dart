@@ -1,6 +1,7 @@
 import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CommentComponent extends StatelessWidget {
   String networkImage;
   String comment;

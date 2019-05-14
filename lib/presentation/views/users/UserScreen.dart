@@ -15,7 +15,7 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreen extends State<UserScreen> implements UserView {
   UserPresenter userPresenter = Injector.inject().resolve<UserPresenter>();
-  List<User> friendsList = null;
+  List<User> friendsList;
 
   @override
   void initState() {

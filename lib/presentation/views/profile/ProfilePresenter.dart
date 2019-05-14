@@ -1,7 +1,6 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileView.dart';
 import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
-import 'package:flutter/foundation.dart';
 
 class ProfilePresenter {
   ProfileView view;
@@ -19,6 +18,6 @@ class ProfilePresenter {
     this.userUseCase.getUser().then((_user) {
       this.view.onCompleteProfile(_user);
       this.userUseCase.user = _user;
-    }, onError: (e) => {this.view.onNetworkError()});
+    }, onError: (e) => this.view.onNetworkError());
   }
 }

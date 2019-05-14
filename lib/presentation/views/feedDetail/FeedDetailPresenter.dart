@@ -3,7 +3,6 @@ import 'package:base_flutter/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailView.dart';
 import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
-import 'package:flutter/foundation.dart';
 
 class FeedDetailPresenter {
   FeedDetailView feedDetailView;
