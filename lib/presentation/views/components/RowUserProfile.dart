@@ -4,6 +4,7 @@ import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class RowUserProfile extends StatelessWidget {
   User _user;
   VoidCallback onClickRow;

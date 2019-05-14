@@ -17,7 +17,7 @@ class FeedScreen extends StatefulWidget {
 
 class _FeedScreen extends State<FeedScreen> implements FeedView {
   FeedPresenter feedPresenter = Injector.inject().resolve<FeedPresenter>();
-  List<Post> posts = null;
+  List<Post> posts;
 
   @override
   Widget build(BuildContext context) {

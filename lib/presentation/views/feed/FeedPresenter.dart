@@ -17,7 +17,7 @@ class FeedPresenter {
 
   void getPosts() {
     this.postUseCase.getPosts().then(
-        (posts) => {this.view.onFeedComplete(posts)},
-        onError: (e) => {this.view.onNetworkError()});
+        (posts) => this.view.onFeedComplete(posts),
+        onError: (e) => this.view.onNetworkError());
   }
 }

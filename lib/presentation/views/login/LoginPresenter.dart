@@ -1,6 +1,7 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/login/LoginView.dart';
 import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginPresenter {
   LoginView loginView;
@@ -12,11 +13,16 @@ class LoginPresenter {
 
   void start(LoginView view) {
     this.loginView = view;
+
+    userUseCase.getUserFromDB().then(
+        (response) => debugPrint("Response => $response"),
+      onError: (e) => debugPrint("Fail DB : $e")
+    );
   }
 
   void onLoginClick(String username, String password) {
     this.userUseCase.login(username, password).then(
-        (response) => {this.loginView.onLoginSuccess()},
+        (response) => this.loginView.onLoginSuccess(),
         onError: (e) => this.loginView.onNetworkError());
   }
 }

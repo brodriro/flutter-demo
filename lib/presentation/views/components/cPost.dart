@@ -3,6 +3,7 @@ import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailScreen.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class PostComponent extends StatelessWidget {
   Post post;
 
