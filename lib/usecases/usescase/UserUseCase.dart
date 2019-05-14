@@ -1,4 +1,5 @@
 import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/entities/UserAuth.dart';
 import 'package:base_flutter/local/entities/UserEntity.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryLocal.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
@@ -23,20 +24,17 @@ class UserUseCase {
     return await this.userRepositoryRemote.getTestAuth();
   }
 
-  Future<Object> login(String user, String password) async {
-    return await this.userRepositoryRemote.login(user, password);
+  Future login(String user, String password) async {
+    UserAuth userAuth =  await this.userRepositoryRemote.login(user, password);
+    saveUser(UserEntity.toUserEntity(userAuth));
   }
 
   Future<String> getUserFromDB() async {
     String result = await this.userRepositoryLocal.getUser();
-
-    UserEntity userEntity = new UserEntity();
-    userEntity.name = "Developer";
-    userEntity.email = "developer@everis.com";
-
-
-    if(result == null) result = await this.userRepositoryLocal.saveUser(userEntity);
     return result;
+  }
+  Future saveUser(UserEntity userEntity) async {
+    await this.userRepositoryLocal.saveUser(userEntity);
   }
 
   User get getCurrentUser => this.user;

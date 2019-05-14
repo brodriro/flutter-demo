@@ -1,4 +1,5 @@
 import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/entities/UserAuth.dart';
 
 //Interface
 abstract class UserRepositoryRemote {
@@ -8,5 +9,5 @@ abstract class UserRepositoryRemote {
 
   Future<String> getTestAuth();
 
-  Future<Object> login(String user, String password);
+  Future<UserAuth> login(String user, String password);
 }

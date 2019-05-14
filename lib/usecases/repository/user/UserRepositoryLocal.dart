@@ -7,6 +7,6 @@ abstract class UserRepositoryLocal {
 
   Future<String> saveUser(UserEntity userEntity);
 
-  Future<String> deleteUser();
+  Future deleteUser(int id);
 
 }

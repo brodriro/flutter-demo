@@ -40,8 +40,8 @@ class DatabaseHelper {
     return id;
   }
 
-  Future<List<Map>> getData(String table, List<String> columns,
-      {String where, List<dynamic> args, String groupBy, String orderBy, int limit, int offset}) async {
+  Future<List<Map>> getData(String table,
+      {List<String> columns,String where, List<dynamic> args, String groupBy, String orderBy, int limit, int offset}) async {
     return await this._database.query(table,
         columns: columns,
         where: where,

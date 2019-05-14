@@ -9,9 +9,9 @@ class DbUserRepository implements UserRepositoryLocal {
   DbUserRepository(this.databaseHelper);
 
   @override
-  Future<String> deleteUser() {
-    // TODO: implement deleteUser
-    return null;
+  Future deleteUser(int id) async {
+    await databaseHelper.deleteRecord(
+        UserEntity.tableName, UserEntity.columnId, id);
   }
 
   @override
@@ -19,8 +19,9 @@ class DbUserRepository implements UserRepositoryLocal {
     await databaseHelper.init();
 
     List<Map> results;
-    results = await databaseHelper.getData(
-        UserEntity.tableName, [UserEntity.columnName, UserEntity.columnEmail]);
+    results = await databaseHelper.getData(UserEntity.tableName,
+        columns: [UserEntity.columnUsername, UserEntity.columnEmail]);
+
     debugPrint("Result records: $results");
 
     if (results.length == 0) return null;
@@ -36,8 +37,7 @@ class DbUserRepository implements UserRepositoryLocal {
 
     debugPrint("new Record with id: $id");
 
-    List<Map<String, dynamic>> results = await databaseHelper.getData(
-        UserEntity.tableName, [UserEntity.columnName, UserEntity.columnEmail]);
+    List<Map<String, dynamic>> results = await databaseHelper.getData(UserEntity.tableName);
 
     return UserEntity.fromMap(results[0]).email;
   }
