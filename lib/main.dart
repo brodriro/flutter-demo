@@ -1,5 +1,5 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/Utils.dart';
+import 'package:base_flutter/presentation/views/utils/Utils.dart';
 import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
 import 'package:base_flutter/presentation/views/login/LoginScreen.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +22,11 @@ class DemoApp extends StatelessWidget {
       theme: ThemeData(
           accentColor: ThemeColor.colorAccent,
           primaryColorDark: ThemeColor.primaryColor,
-          fontFamily: 'Raleway'),
-      initialRoute: "/",
+          fontFamily: CustomFont.raleway),
+      initialRoute: RouteScreen.login,
       routes: {
-        "/": (context) => LoginScreen(),
-        "/Home": (context) => HomeRoute(),
+        RouteScreen.login: (context) => LoginScreen(),
+        RouteScreen.home: (context) => HomeRoute(),
       },
     );
   }
