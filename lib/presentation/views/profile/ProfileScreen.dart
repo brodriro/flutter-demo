@@ -44,6 +44,5 @@ class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
 
   @override
   void onNetworkError() {
-    // TODO: implement onNetworkError
   }
 }

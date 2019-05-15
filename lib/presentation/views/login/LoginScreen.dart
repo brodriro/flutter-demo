@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _LoginScreen();
   }
 }
@@ -24,7 +23,6 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initPresenter();
   }
@@ -134,7 +132,6 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
   @override
   onNetworkError() {
     debugPrint("onNetworkError");
-    // TODO: implement onNetworkError
     return null;
   }
 
