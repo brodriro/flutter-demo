@@ -49,12 +49,23 @@ class UserEntity {
     token = map[columnToken];
   }
 
-  UserEntity.toUserEntity( UserAuth userAuth) {
+  UserEntity.toUserEntity(UserAuth userAuth) {
     username = userAuth.username;
     email = userAuth.email;
     firstName = userAuth.firstName;
     lastName = userAuth.lastName;
     token = userAuth.token;
   }
+
+  static UserAuth toUserAuth(UserEntity userEntity) {
+    return new UserAuth(
+      username: userEntity.username,
+      firstName: userEntity.firstName,
+      lastName: userEntity.lastName,
+      email: userEntity.email,
+      token: userEntity.token
+    );
+  }
+
 
 }

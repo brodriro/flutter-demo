@@ -1,3 +1,4 @@
+import 'package:base_flutter/entities/UserAuth.dart';
 import 'package:base_flutter/local/DatabaseHelper.dart';
 import 'package:base_flutter/local/entities/UserEntity.dart';
 import 'package:base_flutter/usecases/repository/user/UserRepositoryLocal.dart';
@@ -15,7 +16,7 @@ class DbUserRepository implements UserRepositoryLocal {
   }
 
   @override
-  Future<String> getUser() async {
+  Future<UserAuth> getUser() async {
     await databaseHelper.init();
 
     List<Map> results;
@@ -27,7 +28,10 @@ class DbUserRepository implements UserRepositoryLocal {
     if (results.length == 0) return null;
 
     UserEntity userEntity = UserEntity.fromMap(results[0]);
-    return userEntity.email;
+
+    await databaseHelper.closeConnection();
+
+    return UserEntity.toUserAuth(userEntity);
   }
 
   @override

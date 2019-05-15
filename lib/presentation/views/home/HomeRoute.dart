@@ -1,5 +1,5 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/Utils.dart';
+import 'package:base_flutter/presentation/views/utils/Utils.dart';
 import 'package:base_flutter/presentation/views/feed/FeedScreen.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileScreen.dart';
 import 'package:base_flutter/presentation/views/users/UserScreen.dart';

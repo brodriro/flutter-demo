@@ -29,9 +29,8 @@ class UserUseCase {
     saveUser(UserEntity.toUserEntity(userAuth));
   }
 
-  Future<String> getUserFromDB() async {
-    String result = await this.userRepositoryLocal.getUser();
-    return result;
+  Future<UserAuth> getUserFromDB() async {
+    return await this.userRepositoryLocal.getUser();
   }
   Future saveUser(UserEntity userEntity) async {
     await this.userRepositoryLocal.saveUser(userEntity);
