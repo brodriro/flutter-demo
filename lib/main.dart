@@ -22,11 +22,11 @@ class DemoApp extends StatelessWidget {
       theme: ThemeData(
           accentColor: ThemeColor.colorAccent,
           primaryColorDark: ThemeColor.primaryColor,
-          fontFamily: 'Raleway'),
-      initialRoute: "/",
+          fontFamily: CustomFont.raleway),
+      initialRoute: RouteScreen.login,
       routes: {
-        "/": (context) => LoginScreen(),
-        "/Home": (context) => HomeRoute(),
+        RouteScreen.login: (context) => LoginScreen(),
+        RouteScreen.home: (context) => HomeRoute(),
       },
     );
   }

@@ -127,7 +127,7 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
   onLoginSuccess() {
     Navigator.pushReplacementNamed(
         context,
-        "/Home"
+        RouteScreen.home
     );
   }
 
