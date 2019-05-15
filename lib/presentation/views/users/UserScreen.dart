@@ -48,7 +48,6 @@ class _UserScreen extends State<UserScreen> implements UserView {
 
   @override
   void onNetworkError() {
-    // TODO: implement onNetworkError
   }
 
   void initPresenter() {

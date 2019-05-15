@@ -11,8 +11,10 @@ class DbUserRepository implements UserRepositoryLocal {
 
   @override
   Future deleteUser(int id) async {
+    await databaseHelper.init();
     await databaseHelper.deleteRecord(
         UserEntity.tableName, UserEntity.columnId, id);
+    await databaseHelper.closeConnection();
   }
 
   @override
@@ -36,13 +38,17 @@ class DbUserRepository implements UserRepositoryLocal {
 
   @override
   Future<String> saveUser(UserEntity userEntity) async {
+    await databaseHelper.init();
+
     int id = await databaseHelper.insertRecord(
         UserEntity.tableName, userEntity.toMap());
 
     debugPrint("new Record with id: $id");
 
-    List<Map<String, dynamic>> results = await databaseHelper.getData(UserEntity.tableName);
+    List<Map<String, dynamic>> results =
+        await databaseHelper.getData(UserEntity.tableName);
 
+    await databaseHelper.closeConnection();
     return UserEntity.fromMap(results[0]).email;
   }
 }
