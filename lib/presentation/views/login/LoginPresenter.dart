@@ -15,7 +15,7 @@ class LoginPresenter {
     this.loginView = view;
 
     userUseCase.getUserFromDB().then(
-        (response) => debugPrint("Response => $response"),
+        (response) => debugPrint("Response => ${response.email}"),
       onError: (e) => debugPrint("Fail DB : $e")
     );
   }
