@@ -1,4 +1,4 @@
-import 'package:base_flutter/data/entities/User.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
 
 abstract class ProfileView {
   void onCompleteProfile(User user);

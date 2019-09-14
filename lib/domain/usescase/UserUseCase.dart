@@ -1,8 +1,8 @@
-import 'package:base_flutter/data/entities/User.dart';
-import 'package:base_flutter/data/entities/UserAuth.dart';
-import 'package:base_flutter/data/local/entities/UserEntity.dart';
-import 'package:base_flutter/domain/repository/user/UserRepositoryLocal.dart';
-import 'package:base_flutter/domain/repository/user/UserRepositoryRemote.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/data/entities/UserAuth.dart';
+import 'package:DemoFlutter/data/local/entities/UserEntity.dart';
+import 'package:DemoFlutter/domain/repository/user/UserRepositoryLocal.dart';
+import 'package:DemoFlutter/domain/repository/user/UserRepositoryRemote.dart';
 
 class UserUseCase {
   UserRepositoryRemote userRepositoryRemote;

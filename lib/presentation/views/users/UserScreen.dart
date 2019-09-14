@@ -1,9 +1,9 @@
-import 'package:base_flutter/data/entities/User.dart';
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
-import 'package:base_flutter/presentation/views/components/RowUserProfile.dart';
-import 'package:base_flutter/presentation/views/users/UserPresenter.dart';
-import 'package:base_flutter/presentation/views/users/UserView.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
+import 'package:DemoFlutter/presentation/views/components/RowUserProfile.dart';
+import 'package:DemoFlutter/presentation/views/users/UserPresenter.dart';
+import 'package:DemoFlutter/presentation/views/users/UserView.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserScreen extends StatefulWidget {

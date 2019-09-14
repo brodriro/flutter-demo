@@ -1,7 +1,7 @@
-import 'package:base_flutter/data/entities/Post.dart';
-import 'package:base_flutter/data/remote/entities/PostEntity.dart';
-import 'package:base_flutter/data/remote/network/ApiURL.dart';
-import 'package:base_flutter/domain/repository/post/PostRepositoryRemote.dart';
+import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/data/remote/entities/PostEntity.dart';
+import 'package:DemoFlutter/data/remote/network/ApiURL.dart';
+import 'package:DemoFlutter/domain/repository/post/PostRepositoryRemote.dart';
 import 'package:http/http.dart';
 
 class PostRepositoryRemoteImp implements PostRepositoryRemote {

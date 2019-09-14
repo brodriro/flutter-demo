@@ -32,7 +32,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.base_flutter"
+        applicationId "me.rzkbrian.demo_flutter"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()

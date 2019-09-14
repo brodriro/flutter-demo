@@ -1,6 +1,6 @@
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/home/HomeView.dart';
-import 'package:base_flutter/domain/usescase/UserUseCase.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/home/HomeView.dart';
+import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:flutter/foundation.dart';
 
 class HomePresenter {

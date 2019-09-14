@@ -1,8 +1,8 @@
 
 
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/users/UserView.dart';
-import 'package:base_flutter/domain/usescase/UserUseCase.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/users/UserView.dart';
+import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 
 class UserPresenter {
   UserView view;
