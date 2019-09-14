@@ -1,4 +1,4 @@
-import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
+import 'package:DemoFlutter/presentation/views/components/RoundedImage.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

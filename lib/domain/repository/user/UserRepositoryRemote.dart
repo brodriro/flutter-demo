@@ -1,5 +1,5 @@
-import 'package:base_flutter/entities/User.dart';
-import 'package:base_flutter/entities/UserAuth.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/data/entities/UserAuth.dart';
 
 //Interface
 abstract class UserRepositoryRemote {

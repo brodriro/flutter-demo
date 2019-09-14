@@ -1,9 +1,9 @@
-import 'package:base_flutter/entities/Post.dart';
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
-import 'package:base_flutter/presentation/views/components/cPost.dart';
-import 'package:base_flutter/presentation/views/feed/FeedPresenter.dart';
-import 'package:base_flutter/presentation/views/feed/FeedView.dart';
+import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
+import 'package:DemoFlutter/presentation/views/components/cPost.dart';
+import 'package:DemoFlutter/presentation/views/feed/FeedPresenter.dart';
+import 'package:DemoFlutter/presentation/views/feed/FeedView.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {

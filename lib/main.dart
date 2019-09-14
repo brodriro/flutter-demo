@@ -1,7 +1,7 @@
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/utils/Utils.dart';
-import 'package:base_flutter/presentation/views/home/HomeRoute.dart';
-import 'package:base_flutter/presentation/views/login/LoginScreen.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
+import 'package:DemoFlutter/presentation/views/home/HomeRoute.dart';
+import 'package:DemoFlutter/presentation/views/login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/UserAuth.dart';
+import 'package:DemoFlutter/data/entities/UserAuth.dart';
 
 class UserEntity {
   int id;

@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/Post.dart';
+import 'package:DemoFlutter/data/entities/Post.dart';
 
 abstract class FeedDetailView {
   void addComment(Comment comment);

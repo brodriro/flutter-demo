@@ -1,9 +1,9 @@
-import 'package:base_flutter/entities/User.dart';
-import 'package:base_flutter/presentation/di/Injector.dart';
-import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
-import 'package:base_flutter/presentation/views/components/cProfile.dart';
-import 'package:base_flutter/presentation/views/profile/ProfilePresenter.dart';
-import 'package:base_flutter/presentation/views/profile/ProfileView.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/presentation/di/Injector.dart';
+import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
+import 'package:DemoFlutter/presentation/views/components/cProfile.dart';
+import 'package:DemoFlutter/presentation/views/profile/ProfilePresenter.dart';
+import 'package:DemoFlutter/presentation/views/profile/ProfileView.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {

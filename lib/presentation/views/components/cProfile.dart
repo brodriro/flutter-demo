@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/User.dart';
+import 'package:DemoFlutter/data/entities/User.dart';
 import 'package:flutter/material.dart';
 
 class ProfileComponent extends StatelessWidget {
