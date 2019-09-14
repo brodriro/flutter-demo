@@ -1,6 +1,6 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/feed/FeedView.dart';
-import 'package:base_flutter/usecases/usescase/PostUseCase.dart';
+import 'package:base_flutter/domain/usescase/PostUseCase.dart';
 
 class FeedPresenter {
   FeedView view;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:base_flutter/entities/UserAuth.dart';
+import 'package:base_flutter/data/entities/UserAuth.dart';
 
 UserAuthEntity userAuthFromJson(String str) => UserAuthEntity.fromJson(json.decode(str));
 

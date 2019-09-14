@@ -1,6 +1,6 @@
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/profile/ProfileView.dart';
-import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
+import 'package:base_flutter/domain/usescase/UserUseCase.dart';
 
 class ProfilePresenter {
   ProfileView view;

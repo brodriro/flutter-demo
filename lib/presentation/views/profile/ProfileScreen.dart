@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/data/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/components/Miscellaneous.dart';
 import 'package:base_flutter/presentation/views/components/cProfile.dart';

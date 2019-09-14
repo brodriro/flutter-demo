@@ -1,13 +1,13 @@
-import 'package:base_flutter/entities/UserAuth.dart';
-import 'package:base_flutter/local/DatabaseHelper.dart';
-import 'package:base_flutter/local/entities/UserEntity.dart';
-import 'package:base_flutter/usecases/repository/user/UserRepositoryLocal.dart';
+import 'package:base_flutter/data/entities/UserAuth.dart';
+import 'package:base_flutter/data/local/DatabaseHelper.dart';
+import 'package:base_flutter/data/local/entities/UserEntity.dart';
+import 'package:base_flutter/domain/repository/user/UserRepositoryLocal.dart';
 import 'package:flutter/foundation.dart';
 
-class DbUserRepository implements UserRepositoryLocal {
+class UserRepositoryLocalImp implements UserRepositoryLocal {
   DatabaseHelper databaseHelper;
 
-  DbUserRepository(this.databaseHelper);
+  UserRepositoryLocalImp(this.databaseHelper);
 
   @override
   Future deleteUser(int id) async {

@@ -1,6 +1,6 @@
 
 
-import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/data/entities/Post.dart';
 
 abstract class FeedView {
 

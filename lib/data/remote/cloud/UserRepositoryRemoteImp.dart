@@ -1,20 +1,20 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:base_flutter/entities/User.dart';
-import 'package:base_flutter/entities/UserAuth.dart';
-import 'package:base_flutter/remote/entities/UserAuthEntity.dart';
-import 'package:base_flutter/remote/entities/UserEntity.dart';
-import 'package:base_flutter/remote/network/ApiURL.dart';
-import 'package:base_flutter/remote/network/HttpAuth.dart';
-import 'package:base_flutter/usecases/repository/user/UserRepositoryRemote.dart';
+import 'package:base_flutter/data/entities/User.dart';
+import 'package:base_flutter/data/entities/UserAuth.dart';
+import 'package:base_flutter/data/remote/entities/UserAuthEntity.dart';
+import 'package:base_flutter/data/remote/entities/UserEntity.dart';
+import 'package:base_flutter/data/remote/network/ApiURL.dart';
+import 'package:base_flutter/data/remote/network/HttpAuth.dart';
+import 'package:base_flutter/domain/repository/user/UserRepositoryRemote.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
-class CloudUserRepository implements UserRepositoryRemote {
+class UserRepositoryRemoteImp implements UserRepositoryRemote {
   Client _client;
   HttpAuth _httpAuth;
 
-  CloudUserRepository(this._client, this._httpAuth);
+  UserRepositoryRemoteImp(this._client, this._httpAuth);
 
   @override
   Future<User> getUser() async {

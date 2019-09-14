@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/data/entities/Post.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/components/cComment.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailPresenter.dart';

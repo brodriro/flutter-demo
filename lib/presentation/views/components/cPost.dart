@@ -1,4 +1,4 @@
-import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/data/entities/Post.dart';
 import 'package:base_flutter/presentation/views/components/RoundedImage.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailScreen.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@
 
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/users/UserView.dart';
-import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
+import 'package:base_flutter/domain/usescase/UserUseCase.dart';
 
 class UserPresenter {
   UserView view;

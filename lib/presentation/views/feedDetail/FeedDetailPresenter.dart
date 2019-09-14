@@ -1,8 +1,8 @@
-import 'package:base_flutter/entities/Post.dart';
-import 'package:base_flutter/entities/User.dart';
+import 'package:base_flutter/data/entities/Post.dart';
+import 'package:base_flutter/data/entities/User.dart';
 import 'package:base_flutter/presentation/di/Injector.dart';
 import 'package:base_flutter/presentation/views/feedDetail/FeedDetailView.dart';
-import 'package:base_flutter/usecases/usescase/UserUseCase.dart';
+import 'package:base_flutter/domain/usescase/UserUseCase.dart';
 
 class FeedDetailPresenter {
   FeedDetailView feedDetailView;

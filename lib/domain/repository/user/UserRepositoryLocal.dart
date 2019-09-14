@@ -1,6 +1,6 @@
 
-import 'package:base_flutter/entities/UserAuth.dart';
-import 'package:base_flutter/local/entities/UserEntity.dart';
+import 'package:base_flutter/data/entities/UserAuth.dart';
+import 'package:base_flutter/data/local/entities/UserEntity.dart';
 
 abstract class UserRepositoryLocal {
 

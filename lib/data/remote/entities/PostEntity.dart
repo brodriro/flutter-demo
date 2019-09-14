@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/data/entities/Post.dart';
 
 List<PostEntity> postEntityFromJson(String str) {
   final jsonData = json.decode(str);

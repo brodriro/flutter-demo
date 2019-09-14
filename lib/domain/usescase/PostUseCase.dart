@@ -1,5 +1,5 @@
-import 'package:base_flutter/usecases/repository/post/PostRepositoryRemote.dart';
-import 'package:base_flutter/entities/Post.dart';
+import 'package:base_flutter/domain/repository/post/PostRepositoryRemote.dart';
+import 'package:base_flutter/data/entities/Post.dart';
 
 class PostUseCase {
   PostRepositoryRemote postRepositoryRemote;
