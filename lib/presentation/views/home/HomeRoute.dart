@@ -40,7 +40,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
       UserScreen()
     ];
 
-    return new Scaffold(
+    return  Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(

@@ -1,3 +1,4 @@
+import 'package:DemoFlutter/data/entities/User.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,14 +9,26 @@ abstract class UserState extends Equatable {
   List<Object> get props => [];
 }
 
-class UserInitial extends UserState {}
+class UserInitialState extends UserState {}
 
-class UserLoading extends UserState {}
+class UserLoadingState extends UserState {}
 
-class UserFailure extends UserState {
+class UserListFriendsState extends UserState {
+  final List<User> friends;
+
+  const UserListFriendsState({@required this.friends});
+
+  @override
+  List<Object> get props => [friends];
+
+  @override
+  String toString() => 'UserFriendsList : $friends';
+}
+
+class UserFailureState extends UserState {
   final String error;
 
-  const UserFailure({@required this.error});
+  const UserFailureState({@required this.error});
 
   @override
   List<Object> get props => [error];
