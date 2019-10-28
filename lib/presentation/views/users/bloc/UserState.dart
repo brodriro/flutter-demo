@@ -1,6 +1,6 @@
 import 'package:DemoFlutter/data/entities/User.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:meta/meta.dart';
 
 abstract class UserState extends Equatable {
   const UserState();

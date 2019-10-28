@@ -5,7 +5,6 @@ import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.da
 import 'package:DemoFlutter/presentation/views/home/HomePresenter.dart';
 import 'package:DemoFlutter/presentation/views/login/LoginPresenter.dart';
 import 'package:DemoFlutter/presentation/views/profile/ProfilePresenter.dart';
-import 'package:DemoFlutter/presentation/views/users/UserPresenter.dart';
 import 'package:DemoFlutter/data/remote/cloud/PostRepositoryRemoteImp.dart';
 import 'package:DemoFlutter/data/remote/cloud/UserRepositoryRemoteImp.dart';
 import 'package:DemoFlutter/data/remote/network/HttpAuth.dart';
@@ -43,7 +42,6 @@ class Injector {
     mContainer.registerFactory((c) => new ProfilePresenter());
     mContainer.registerFactory((c) => new FeedPresenter());
     mContainer.registerFactory((c) => new FeedDetailPresenter());
-    mContainer.registerFactory((c) => new UserPresenter());
   }
   
   static Container inject() => mContainer; 

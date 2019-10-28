@@ -1,8 +1,7 @@
-import 'package:DemoFlutter/data/entities/User.dart';
 import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
-import 'package:DemoFlutter/presentation/views/users/bloc_userScreen/UserEvent.dart';
-import 'package:DemoFlutter/presentation/views/users/bloc_userScreen/UserState.dart';
+import 'package:DemoFlutter/presentation/views/users/bloc/UserEvent.dart';
+import 'package:DemoFlutter/presentation/views/users/bloc/UserState.dart';
 import 'package:bloc/bloc.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -20,8 +19,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserGetAllFriendsEvent) {
       yield UserLoadingState();
 
-      List<User> allFriends = await userUserCase.getFriends();
-      yield UserListFriendsState(friends: allFriends);
+      try {
+        yield UserListFriendsState(friends: await userUserCase.getFriends());
+      } catch (e) {
+        yield UserFailureState(error: "Error al obtener Usuario");
+      }
     }
   }
 }
