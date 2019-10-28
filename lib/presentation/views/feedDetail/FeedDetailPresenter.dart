@@ -1,8 +1,8 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
 import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailView.dart';
-import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 
 class FeedDetailPresenter {
   FeedDetailView feedDetailView;
@@ -15,7 +15,7 @@ class FeedDetailPresenter {
     this.currentUser = this.userUseCase.getCurrentUser;
   }
 
-  void start(FeedDetailView view){
+  void start(FeedDetailView view) {
     this.feedDetailView = view;
   }
 
@@ -23,7 +23,7 @@ class FeedDetailPresenter {
     if (message.trim().toString().isEmpty) return;
     Comment comment = new Comment(currentUser.getId, currentUser.getUsername,
         currentUser.getImage, message);
-   
+
     this.feedDetailView.addComment(comment);
   }
 }

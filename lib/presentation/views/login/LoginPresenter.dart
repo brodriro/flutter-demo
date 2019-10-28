@@ -1,6 +1,6 @@
+import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/login/LoginView.dart';
-import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:flutter/foundation.dart';
 
 class LoginPresenter {
@@ -16,8 +16,7 @@ class LoginPresenter {
 
     userUseCase.getUserFromDB().then(
         (response) => debugPrint("Response => ${response.email}"),
-      onError: (e) => debugPrint("Fail DB : $e")
-    );
+        onError: (e) => debugPrint("Fail DB : $e"));
   }
 
   void onLoginClick(String username, String password) {

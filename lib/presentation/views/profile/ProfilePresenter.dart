@@ -1,6 +1,6 @@
+import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/profile/ProfileView.dart';
-import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 
 class ProfilePresenter {
   ProfileView view;

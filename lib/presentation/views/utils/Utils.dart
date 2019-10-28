@@ -1,12 +1,8 @@
-
 import 'package:flutter/material.dart';
 
-class Utils {
-   
-}
+class Utils {}
 
-
-class ThemeColor{
+class ThemeColor {
   static final Color primaryColor = Colors.blue;
   static final Color primaryDarkColor = Colors.blue;
   static final Color colorAccent = Colors.blueAccent;
@@ -14,7 +10,7 @@ class ThemeColor{
   static final Color colorText = Colors.grey[850];
 }
 
-class RouteScreen{
+class RouteScreen {
   static final String home = "/Home";
   static final String login = "/";
 }

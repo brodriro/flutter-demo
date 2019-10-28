@@ -7,16 +7,17 @@ import 'package:flutter/material.dart';
 
 class FeedDetailScreen extends StatefulWidget {
   final Post post;
-  
 
-  FeedDetailScreen({ @required this.post});
+  FeedDetailScreen({@required this.post});
 
   @override
   _FeedDetailScreenState createState() => _FeedDetailScreenState();
 }
 
-class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDetailView{
-  FeedDetailPresenter feedDetailPresenter = Injector.inject().resolve<FeedDetailPresenter>();
+class _FeedDetailScreenState extends State<FeedDetailScreen>
+    implements FeedDetailView {
+  FeedDetailPresenter feedDetailPresenter =
+      Injector.inject().resolve<FeedDetailPresenter>();
   List<Comment> commentList;
 
   final inputMessageController = new TextEditingController();
@@ -120,7 +121,9 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   }
 
   void onSendInputMessage() {
-    this.feedDetailPresenter.onInputSendMessage(inputMessageController.text.toString());
+    this
+        .feedDetailPresenter
+        .onInputSendMessage(inputMessageController.text.toString());
     this.inputMessageController.clear();
   }
 
@@ -139,7 +142,7 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   @override
   void addComment(Comment comment) {
     setState(() {
-     this.commentList.add(comment); 
+      this.commentList.add(comment);
     });
   }
 }

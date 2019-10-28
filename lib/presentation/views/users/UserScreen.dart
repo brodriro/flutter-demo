@@ -45,7 +45,7 @@ class _UserScreen extends State<UserScreen> implements UserView {
         return bloc;
       },
       child: BlocBuilder<UserBloc, UserState>(
-       // bloc: bloc,
+        // bloc: bloc,
         builder: (context, state) {
           if (state is UserListFriendsState) {
             friendsList = state.friends;

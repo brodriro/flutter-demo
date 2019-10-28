@@ -1,7 +1,7 @@
 import 'package:DemoFlutter/presentation/di/Injector.dart';
-import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/login/LoginPresenter.dart';
 import 'package:DemoFlutter/presentation/views/login/LoginView.dart';
+import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -101,7 +101,7 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
   }
 
   String _validateEmail(String value) {
-    if(value.trim().isEmpty) return "Invalid Username";
+    if (value.trim().isEmpty) return "Invalid Username";
 
     user = value;
     return null;
@@ -123,10 +123,7 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
 
   @override
   onLoginSuccess() {
-    Navigator.pushReplacementNamed(
-        context,
-        RouteScreen.home
-    );
+    Navigator.pushReplacementNamed(context, RouteScreen.home);
   }
 
   @override

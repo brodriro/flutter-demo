@@ -10,6 +10,7 @@ class PostComponent extends StatelessWidget {
   PostComponent(this.post);
 
   BuildContext context;
+
   @override
   Widget build(BuildContext context) {
     this.context = context;

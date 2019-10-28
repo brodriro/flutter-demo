@@ -16,12 +16,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
-  ProfilePresenter profilePresenter = Injector.inject().resolve<ProfilePresenter>();
+  ProfilePresenter profilePresenter =
+      Injector.inject().resolve<ProfilePresenter>();
   User user;
 
   @override
   Widget build(BuildContext context) {
-    return (user == null) ? CircularProgressComponent() : ProfileComponent(user);
+    return (user == null)
+        ? CircularProgressComponent()
+        : ProfileComponent(user);
   }
 
   @override
@@ -43,6 +46,5 @@ class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
   }
 
   @override
-  void onNetworkError() {
-  }
+  void onNetworkError() {}
 }

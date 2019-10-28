@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProfileComponent extends StatelessWidget {
   final User _user;
+
   ProfileComponent(this._user);
 
   @override

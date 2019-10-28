@@ -1,6 +1,6 @@
+import 'package:DemoFlutter/domain/usescase/PostUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/feed/FeedView.dart';
-import 'package:DemoFlutter/domain/usescase/PostUseCase.dart';
 
 class FeedPresenter {
   FeedView view;
@@ -16,8 +16,7 @@ class FeedPresenter {
   }
 
   void getPosts() {
-    this.postUseCase.getPosts().then(
-        (posts) => this.view.onFeedComplete(posts),
+    this.postUseCase.getPosts().then((posts) => this.view.onFeedComplete(posts),
         onError: (e) => this.view.onNetworkError());
   }
 }

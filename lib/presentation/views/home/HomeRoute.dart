@@ -1,9 +1,10 @@
 import 'package:DemoFlutter/presentation/di/Injector.dart';
-import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/feed/FeedScreen.dart';
 import 'package:DemoFlutter/presentation/views/profile/ProfileScreen.dart';
 import 'package:DemoFlutter/presentation/views/users/UserScreen.dart';
+import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
 import 'package:flutter/material.dart';
+
 import 'HomePresenter.dart';
 import 'HomeView.dart';
 
@@ -40,7 +41,7 @@ class HomeState extends State<HomeRoute> implements HomeView {
       UserScreen()
     ];
 
-    return  Scaffold(
+    return Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
