@@ -8,34 +8,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UserScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _UserScreen();
-  }
-}
-
-class _UserScreen extends State<UserScreen> {
-  List<User> friendsList;
-  UserBloc bloc;
+@immutable
+class UserScreen extends StatelessWidget {
+  List<User> _friendsList;
+  UserBloc _bloc;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserBloc>(
       builder: (context) {
-        bloc = UserBloc();
-        bloc.add(UserGetAllFriendsEvent());
-        return bloc;
+        _bloc = UserBloc();
+        _bloc.add(UserGetAllFriendsEvent());
+        return _bloc;
       },
       child: BlocBuilder<UserBloc, UserState>(
         // bloc: bloc,
         builder: (context, state) {
           if (state is UserListFriendsState) {
-            friendsList = state.friends;
+            _friendsList = state.friends;
           }
-          return (friendsList == null)
+          return (_friendsList == null)
               ? CircularProgressComponent()
-              : buildList(friendsList);
+              : buildList(_friendsList);
         },
       ),
     );

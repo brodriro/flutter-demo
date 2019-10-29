@@ -1,31 +1,14 @@
-import 'package:DemoFlutter/presentation/di/Injector.dart';
-import 'package:DemoFlutter/presentation/views/login/LoginPresenter.dart';
-import 'package:DemoFlutter/presentation/views/login/LoginView.dart';
-import 'package:DemoFlutter/presentation/views/utils/Utils.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _LoginScreen();
-  }
-}
-
-class _LoginScreen extends State<LoginScreen> implements LoginView {
-  LoginPresenter loginPresenter = Injector.inject().resolve<LoginPresenter>();
-
+@immutable
+class LoginScreen extends StatelessWidget {
   String user, password;
 
   final _formKey = GlobalKey<FormState>();
   final emailController = new TextEditingController();
   final passwordController = new TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    initPresenter();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +72,7 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
                       ' Login ',
                       style: new TextStyle(color: Colors.blue),
                     ),
-                    onPressed: () => onPressLogin(),
+                    onPressed: () => _onPressLogin(),
                     color: Colors.white,
                   ),
                   margin: new EdgeInsets.only(top: 20.0),
@@ -113,26 +96,15 @@ class _LoginScreen extends State<LoginScreen> implements LoginView {
     return null;
   }
 
-  onPressLogin() {
+  _onPressLogin() {
     if (this._formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      this.loginPresenter.onLoginClick(user, password);
+      //  this.loginPresenter.onLoginClick(user, password);
     }
   }
 
-  @override
-  onLoginSuccess() {
+  _onLoginSuccess(BuildContext context) {
     Navigator.pushReplacementNamed(context, RouteScreen.home);
-  }
-
-  @override
-  onNetworkError() {
-    debugPrint("onNetworkError");
-    return null;
-  }
-
-  void initPresenter() {
-    this.loginPresenter.start(this);
   }
 }
