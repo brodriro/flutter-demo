@@ -1,110 +1,195 @@
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
+import 'package:DemoFlutter/presentation/views/login/bloc/LoginBloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-@immutable
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   String user, password;
 
-  final _formKey = GlobalKey<FormState>();
-  final emailController = new TextEditingController();
-  final passwordController = new TextEditingController();
+  LoginBloc _loginBloc;
+
+  final _emailController = new TextEditingController();
+
+  final _passwordController = new TextEditingController();
+
+  @override
+  void initState() {
+    _emailController.addListener(_onEmailChanged);
+    _passwordController.addListener(_onPasswordChanged);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return  Scaffold(
       backgroundColor: ThemeColor.backgroundRow,
-      body: new Container(
-          color: ThemeColor.primaryDarkColor,
-          alignment: Alignment.center,
-          padding: new EdgeInsets.all(20.0),
-          child: new Form(
-            key: this._formKey,
-            child: new Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                  padding:
-                      EdgeInsets.only(top: 0, left: 20, bottom: 2, right: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                  ),
-                  child: new TextFormField(
-                    validator: this._validateEmail,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        labelStyle: TextStyle(fontSize: 12),
-                        hintText: 'Username',
-                        labelText: 'Username'),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                  padding:
-                      EdgeInsets.only(top: 0, left: 20, bottom: 2, right: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                  ),
-                  child: new TextFormField(
-                    obscureText: true,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: this._validatePassword,
-                    decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        labelStyle: TextStyle(fontSize: 12),
-                        hintText: 'Password',
-                        labelText: 'Enter your password'),
-                  ),
-                ),
-                new Container(
-                  child: new RaisedButton(
-                    shape: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 0, style: BorderStyle.none),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: new Text(
-                      ' Login ',
-                      style: new TextStyle(color: Colors.blue),
+      body: BlocProvider<LoginBloc>(
+        builder: (context) {
+          _loginBloc = LoginBloc();
+          return _loginBloc;
+        },
+        child: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state){
+            if (state.isSuccess) {
+              _onLoginSuccess(context);
+            }
+            if (state.isFailure) {
+              Scaffold.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text('Login Failure'), Icon(Icons.error)],
                     ),
-                    onPressed: () => _onPressLogin(),
-                    color: Colors.white,
+                    backgroundColor: Colors.red,
                   ),
-                  margin: new EdgeInsets.only(top: 20.0),
-                )
-              ],
-            ),
-          )),
+                );
+            }
+            if (state.isSubmitting) {
+              Scaffold.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Logging In...'),
+                        CircularProgressIndicator(),
+                      ],
+                    ),
+                  ),
+                );
+            }
+          },
+          child: BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              return buildContainer(context, state);
+            },
+          ),
+        ),
+      ),
     );
   }
 
-  String _validateEmail(String value) {
-    if (value.trim().isEmpty) return "Invalid Username";
-
-    user = value;
-    return null;
+  Container buildContainer(BuildContext context, LoginState state) {
+    return new Container(
+        color: ThemeColor.primaryDarkColor,
+        alignment: Alignment.center,
+        padding: new EdgeInsets.all(20.0),
+        child: new Form(
+          child: new Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                padding:
+                    EdgeInsets.only(top: 0, left: 20, bottom: 2, right: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: new TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  autovalidate: true,
+                  validator: (_) {
+                    return !state.isEmailValid ? 'Invalid Email' : null;
+                  },
+                  decoration: new InputDecoration(
+                      border: InputBorder.none,
+                      labelStyle: TextStyle(fontSize: 12),
+                      hintText: 'Username',
+                      labelText: 'Username'),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                padding:
+                    EdgeInsets.only(top: 0, left: 20, bottom: 2, right: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: new TextFormField(
+                  obscureText: true,
+                  autovalidate: true,
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _passwordController,
+                  validator: (_) {
+                    return !state.isPasswordValid ? 'Invalid Password' : null;
+                  },
+                  decoration: new InputDecoration(
+                      border: InputBorder.none,
+                      labelStyle: TextStyle(fontSize: 12),
+                      hintText: 'Password',
+                      labelText: 'Enter your password'),
+                ),
+              ),
+              Container(
+                child: new RaisedButton(
+                  shape: OutlineInputBorder(
+                      borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: new Text(
+                    ' Login ',
+                    style: new TextStyle(color: Colors.blue),
+                  ),
+                  onPressed:
+                      isLoginButtonEnabled(state) ? _onFormSubmitted : null,
+                  color: Colors.white,
+                ),
+                margin: new EdgeInsets.only(top: 20.0),
+              )
+            ],
+          ),
+        ));
   }
 
-  String _validatePassword(String value) {
-    if (value.length < 6) return 'The Password must be at least 8 characters.';
-    password = value;
-    return null;
-  }
+  bool get isPopulated =>
+      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
-  _onPressLogin() {
-    if (this._formKey.currentState.validate()) {
-      _formKey.currentState.save();
-
-      //  this.loginPresenter.onLoginClick(user, password);
-    }
+  bool isLoginButtonEnabled(LoginState state) {
+    return state.isFormValid && isPopulated && !state.isSubmitting;
   }
 
   _onLoginSuccess(BuildContext context) {
     Navigator.pushReplacementNamed(context, RouteScreen.home);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _onEmailChanged() {
+    _loginBloc.add(
+      EmailChanged(email: _emailController.text),
+    );
+  }
+
+  void _onPasswordChanged() {
+    _loginBloc.add(
+      PasswordChanged(password: _passwordController.text),
+    );
+  }
+
+  void _onFormSubmitted() {
+    _loginBloc.add(
+      LoginWithCredentialsPressed(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
+    );
   }
 }
