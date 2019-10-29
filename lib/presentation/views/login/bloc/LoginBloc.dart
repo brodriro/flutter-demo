@@ -7,8 +7,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+export 'LoginEvent.dart';
+export 'LoginState.dart';
 
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   UserUseCase _userUseCase;
 
   LoginBloc() {
@@ -18,16 +20,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   LoginState get initialState => LoginState.empty();
 
-
   @override
-  Stream<LoginState> transformEvents(Stream<LoginEvent> events,
-      Stream<LoginState> Function(LoginEvent event) next,) {
+  Stream<LoginState> transformEvents(
+    Stream<LoginEvent> events,
+    Stream<LoginState> Function(LoginEvent event) next,
+  ) {
     //Observa el estado actual
     final observableStream = events as Observable<LoginEvent>;
 
     // Verifica si el evento actual es diferente a los eventos de los inputs
     final nonDebounceStream = observableStream.where((event) {
-      debugPrint("Evento actual ${event}");
       //El evento actual es diferente a los eventos de las cajas de inputs
       return (event is! EmailChanged && event is! PasswordChanged);
     });
@@ -38,8 +40,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }).debounceTime(Duration(milliseconds: 300));
 
     //Combina los Streams en orden segun el tiempo en que fueron llamados, lanzando el ultimo evento llamado
-    return super.transformEvents(
-        nonDebounceStream.mergeWith([debounceStream]), next);
+    return super
+        .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
   }
 
   @override
@@ -70,7 +72,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithDataBase() async* {
     try {
-     await _userUseCase.getUserFromDB();
+      await _userUseCase.getUserFromDB();
       yield LoginState.success();
     } catch (_) {
       yield LoginState.failure();
@@ -89,4 +91,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginState.failure();
     }
   }
-}}
+}
