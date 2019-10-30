@@ -27,15 +27,6 @@ class UserRepositoryRemoteImp implements UserRepositoryRemote {
     return UserEntity.toUser(userEntity);
   }
 
-  Future<String> getTestAuth() async {
-    String url = ApiURL.authURL;
-
-    HttpClientResponse response = await _httpAuth.getRequest(url);
-
-    var responseBody = await HttpAuth.parseBody(response);
-    return responseBody;
-  }
-
   @override
   Future<List<User>> getFriends() async {
     String url = ApiURL.friends;

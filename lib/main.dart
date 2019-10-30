@@ -1,6 +1,6 @@
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
-import 'package:DemoFlutter/presentation/views/home/HomeRoute.dart';
+import 'package:DemoFlutter/presentation/views/home/HomeScreen.dart';
 import 'package:DemoFlutter/presentation/views/login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +25,7 @@ class DemoApp extends StatelessWidget {
       initialRoute: RouteScreen.login,
       routes: {
         RouteScreen.login: (context) => LoginScreen(),
-        RouteScreen.home: (context) => HomeRoute(),
+        RouteScreen.home: (context) => HomeScreen(),
       },
     );
   }

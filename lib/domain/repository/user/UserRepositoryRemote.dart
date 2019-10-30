@@ -7,7 +7,5 @@ abstract class UserRepositoryRemote {
 
   Future<List<User>> getFriends();
 
-  Future<String> getTestAuth();
-
   Future<UserAuth> login(String user, String password);
 }

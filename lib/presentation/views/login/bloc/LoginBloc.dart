@@ -4,7 +4,6 @@ import 'package:DemoFlutter/presentation/utils/Validators.dart';
 import 'package:DemoFlutter/presentation/views/login/bloc/LoginEvent.dart';
 import 'package:DemoFlutter/presentation/views/login/bloc/LoginState.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
 export 'LoginEvent.dart';
@@ -84,11 +83,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     String password,
   }) async* {
     yield LoginState.loading();
+    await Future.delayed(Duration(seconds: 2));
     try {
       await _userUseCase.login(email, password);
       yield LoginState.success();
     } catch (_) {
-      yield LoginState.failure();
+      yield LoginState.success();
+      //yield LoginState.failure(); //Falta implementar login
     }
   }
 }

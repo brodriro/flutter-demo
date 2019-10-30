@@ -1,23 +1,20 @@
-import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/feed/FeedScreen.dart';
+import 'package:DemoFlutter/presentation/views/home/bloc/HomeBloc.dart';
 import 'package:DemoFlutter/presentation/views/profile/ProfileScreen.dart';
 import 'package:DemoFlutter/presentation/views/users/UserScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'HomePresenter.dart';
-import 'HomeView.dart';
-
-class HomeRoute extends StatefulWidget {
-  HomeRoute();
+class HomeScreen extends StatefulWidget {
+  HomeScreen();
 
   @override
-  HomeState createState() => new HomeState();
+  _HomeState createState() => new _HomeState();
 }
 
-class HomeState extends State<HomeRoute> implements HomeView {
-  HomePresenter homePresenter = Injector.inject().resolve<HomePresenter>();
-
+class _HomeState extends State<HomeScreen> {
+  HomeBloc _bloc;
   int indexTap = 0;
 
   void onTapTapped(int index) {
@@ -29,7 +26,6 @@ class HomeState extends State<HomeRoute> implements HomeView {
   @override
   void initState() {
     super.initState();
-    initPresenter();
   }
 
   @override
@@ -42,7 +38,26 @@ class HomeState extends State<HomeRoute> implements HomeView {
     ];
 
     return Scaffold(
-      body: widgetsChildren[indexTap],
+      body: BlocProvider<HomeBloc>(
+        builder: (context) {
+          _bloc = HomeBloc();
+          return _bloc;
+        },
+        child: BlocListener<HomeBloc, HomeState>(
+          listener: (context, state) {
+            debugPrint("Current State- Listener: $state");
+          },
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              debugPrint("Current State- Builder: $state");
+              if (state is StartedState) {
+                _bloc.add(CheckUserInDatabase());
+              }
+              return widgetsChildren[indexTap];
+            },
+          ),
+        ),
+      ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
             canvasColor: ThemeColor.primaryColor, primaryColor: Colors.white),
@@ -59,14 +74,5 @@ class HomeState extends State<HomeRoute> implements HomeView {
         ),
       ),
     );
-  }
-
-  @override
-  void onNetworkError() {
-    debugPrint("Screen: network Error");
-  }
-
-  void initPresenter() {
-    this.homePresenter.start(this);
   }
 }
