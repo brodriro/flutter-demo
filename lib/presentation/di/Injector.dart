@@ -5,7 +5,6 @@ import 'package:DemoFlutter/data/remote/cloud/UserRepositoryRemoteImp.dart';
 import 'package:DemoFlutter/data/remote/network/HttpAuth.dart';
 import 'package:DemoFlutter/domain/usescase/PostUseCase.dart';
 import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
-import 'package:DemoFlutter/presentation/views/feed/FeedPresenter.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
 import 'package:http/http.dart';
 import 'package:kiwi/kiwi.dart';
@@ -39,7 +38,6 @@ class Injector {
         (c) => PostUseCase(c.resolve<PostRepositoryRemoteImp>()));
 
     //Presenter
-    mContainer.registerFactory((c) => new FeedPresenter());
     mContainer.registerFactory((c) => new FeedDetailPresenter());
   }
 
