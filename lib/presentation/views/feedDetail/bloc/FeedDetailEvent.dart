@@ -8,12 +8,14 @@ abstract class FeedDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetData extends FeedDetailEvent {}
-class NewCommentEvent extends FeedDetailEvent {
+class InputSendMessage extends FeedDetailEvent {
   String comment;
 
-  NewCommentEvent({@required this.comment});
+  InputSendMessage({@required this.comment});
 
   @override
   List<Object> get props => [comment];
+
+  @override
+  String toString() => "InputSendMessageEvent:$comment";
 }

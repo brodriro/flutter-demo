@@ -11,11 +11,23 @@ abstract class FeedDetailState extends Equatable {
 
 class InitialState extends FeedDetailState {}
 
-class CommentAdded extends FeedDetailState{
+class InputEmpty extends FeedDetailState{
+  String text;
+  InputEmpty({@required this.text});
+
+  @override
+  List<Object> get props => [text];
+}
+
+class AddComment extends FeedDetailState{
+
   Comment comment;
 
-  CommentAdded({@required this.comment});
+  AddComment({@required this.comment});
 
   @override
   List<Object> get props => [comment];
+
+  @override
+  String toString() => "AddComentState: $comment";
 }
