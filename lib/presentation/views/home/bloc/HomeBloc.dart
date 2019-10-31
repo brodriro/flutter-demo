@@ -23,7 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await _userUseCase.getUserFromDB();
         yield UserLoggedState();
       } catch (exception) {
-        yield FailedState();
+        yield FailedState(error: "User not found");
       }
     }
   }
