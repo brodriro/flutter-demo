@@ -1,10 +1,10 @@
-import 'package:DemoFlutter/data/entities/User.dart';
-import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/cProfile.dart';
-import 'package:DemoFlutter/presentation/views/profile/ProfilePresenter.dart';
-import 'package:DemoFlutter/presentation/views/profile/ProfileView.dart';
+import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileBloc.dart';
+import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileEvent.dart';
+import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileState.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen();
@@ -15,36 +15,46 @@ class ProfileScreen extends StatefulWidget {
   }
 }
 
-class _ProfileScreen extends State<ProfileScreen> implements ProfileView {
-  ProfilePresenter profilePresenter =
-      Injector.inject().resolve<ProfilePresenter>();
-  User user;
+class _ProfileScreen extends State<ProfileScreen> {
+  ProfileBloc bloc;
 
   @override
   Widget build(BuildContext context) {
-    return (user == null)
-        ? CircularProgressComponent()
-        : ProfileComponent(user);
+    return BlocProvider<ProfileBloc>(
+      builder: (context) {
+        bloc = ProfileBloc();
+        bloc.add(GetProfile());
+        return bloc;
+      },
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state is LoadingState) {
+            return CircularProgressComponent();
+          }
+          if (state is UserReadyState) {
+            return ProfileComponent(state.user);
+          }
+          if (state is ErrorState) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text('Get Profile Failure'), Icon(Icons.error)],
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+              );
+          }
+          return Container();
+        },
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    initPresenter();
   }
-
-  void initPresenter() {
-    this.profilePresenter.start(this);
-    this.profilePresenter.getUser();
-  }
-
-  @override
-  void onCompleteProfile(User user) {
-    setState(() {
-      this.user = user;
-    });
-  }
-
-  @override
-  void onNetworkError() {}
 }

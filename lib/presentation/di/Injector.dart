@@ -7,7 +7,6 @@ import 'package:DemoFlutter/domain/usescase/PostUseCase.dart';
 import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/views/feed/FeedPresenter.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
-import 'package:DemoFlutter/presentation/views/profile/ProfilePresenter.dart';
 import 'package:http/http.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -40,7 +39,6 @@ class Injector {
         (c) => PostUseCase(c.resolve<PostRepositoryRemoteImp>()));
 
     //Presenter
-    mContainer.registerFactory((c) => new ProfilePresenter());
     mContainer.registerFactory((c) => new FeedPresenter());
     mContainer.registerFactory((c) => new FeedDetailPresenter());
   }

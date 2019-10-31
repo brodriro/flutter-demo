@@ -22,7 +22,6 @@ class UserScreen extends StatelessWidget {
         return _bloc;
       },
       child: BlocBuilder<UserBloc, UserState>(
-        // bloc: bloc,
         builder: (context, state) {
           if (state is UserListFriendsState) {
             _friendsList = state.friends;
