@@ -1,11 +1,5 @@
 import 'package:DemoFlutter/data/local/DatabaseHelper.dart';
 import 'package:DemoFlutter/data/local/db/UserRepositoryLocalImp.dart';
-import 'package:DemoFlutter/presentation/views/feed/FeedPresenter.dart';
-import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
-import 'package:DemoFlutter/presentation/views/home/HomePresenter.dart';
-import 'package:DemoFlutter/presentation/views/login/LoginPresenter.dart';
-import 'package:DemoFlutter/presentation/views/profile/ProfilePresenter.dart';
-import 'package:DemoFlutter/presentation/views/users/UserPresenter.dart';
 import 'package:DemoFlutter/data/remote/cloud/PostRepositoryRemoteImp.dart';
 import 'package:DemoFlutter/data/remote/cloud/UserRepositoryRemoteImp.dart';
 import 'package:DemoFlutter/data/remote/network/HttpAuth.dart';
@@ -16,7 +10,6 @@ import 'package:kiwi/kiwi.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class Injector {
-  
   static Container mContainer;
 
   static void setup() {
@@ -26,25 +19,25 @@ class Injector {
 
     mContainer.registerFactory((c) => new Client());
     mContainer.registerFactory((c) => new HttpAuth());
-    mContainer.registerFactory((c)=> database);
-    mContainer.registerFactory((c)=> new DatabaseHelper(c.resolve<Database>()));
+    mContainer.registerFactory((c) => database);
+    mContainer
+        .registerFactory((c) => new DatabaseHelper(c.resolve<Database>()));
 
-    mContainer.registerFactory((c) => UserRepositoryRemoteImp(c.resolve<Client>(), c.resolve<HttpAuth>()));
-    mContainer.registerFactory((c) => PostRepositoryRemoteImp(c.resolve<Client>()));
-    mContainer.registerFactory((c)=> UserRepositoryLocalImp(c.resolve<DatabaseHelper>()));
+    mContainer.registerFactory((c) =>
+        UserRepositoryRemoteImp(c.resolve<Client>(), c.resolve<HttpAuth>()));
+    mContainer
+        .registerFactory((c) => PostRepositoryRemoteImp(c.resolve<Client>()));
+    mContainer.registerFactory(
+        (c) => UserRepositoryLocalImp(c.resolve<DatabaseHelper>()));
 
-    mContainer.registerSingleton((c) => UserUseCase(c.resolve<UserRepositoryRemoteImp>(), c.resolve<UserRepositoryLocalImp>()));
-    mContainer.registerFactory((c) => PostUseCase(c.resolve<PostRepositoryRemoteImp>()));
+    mContainer.registerSingleton((c) => UserUseCase(
+        c.resolve<UserRepositoryRemoteImp>(),
+        c.resolve<UserRepositoryLocalImp>()));
+    mContainer.registerFactory(
+        (c) => PostUseCase(c.resolve<PostRepositoryRemoteImp>()));
 
-
-    //Presenter
-    mContainer.registerFactory((c) => new LoginPresenter());
-    mContainer.registerFactory((c) => new HomePresenter());
-    mContainer.registerFactory((c) => new ProfilePresenter());
-    mContainer.registerFactory((c) => new FeedPresenter());
-    mContainer.registerFactory((c) => new FeedDetailPresenter());
-    mContainer.registerFactory((c) => new UserPresenter());
+    //BLoCs
   }
-  
-  static Container inject() => mContainer; 
+
+  static Container inject() => mContainer;
 }

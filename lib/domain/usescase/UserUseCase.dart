@@ -20,9 +20,6 @@ class UserUseCase {
     return await this.userRepositoryRemote.getFriends();
   }
 
-  Future<String> testAuth() async {
-    return await this.userRepositoryRemote.getTestAuth();
-  }
 
   Future login(String user, String password) async {
     UserAuth userAuth =  await this.userRepositoryRemote.login(user, password);

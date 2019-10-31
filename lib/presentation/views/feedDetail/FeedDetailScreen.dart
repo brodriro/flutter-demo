@@ -1,24 +1,23 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
-import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/components/cComment.dart';
-import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
-import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailView.dart';
+import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailBloc.dart';
+import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailEvent.dart';
+import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailState.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeedDetailScreen extends StatefulWidget {
   final Post post;
-  
 
-  FeedDetailScreen({ @required this.post});
+  FeedDetailScreen({@required this.post});
 
   @override
   _FeedDetailScreenState createState() => _FeedDetailScreenState();
 }
 
-class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDetailView{
-  FeedDetailPresenter feedDetailPresenter = Injector.inject().resolve<FeedDetailPresenter>();
+class _FeedDetailScreenState extends State<FeedDetailScreen> {
   List<Comment> commentList;
-
+  FeedDetailBloc bloc;
   final inputMessageController = new TextEditingController();
 
   @override
@@ -29,7 +28,23 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
 
     return new Scaffold(
       backgroundColor: Colors.blue,
-      body: body(),
+      body: BlocProvider<FeedDetailBloc>(
+          builder: (context) {
+            bloc = FeedDetailBloc();
+            return bloc;
+          },
+          child: BlocListener<FeedDetailBloc, FeedDetailState>(
+            listener: (context, state) {
+              if (state is AddComment) {
+                this.commentList.add(state.comment);
+              }
+            },
+            child: BlocBuilder<FeedDetailBloc, FeedDetailState>(
+              builder: (context, state) {
+                return body();
+              },
+            ),
+          )),
     );
   }
 
@@ -120,26 +135,13 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> implements FeedDeta
   }
 
   void onSendInputMessage() {
-    this.feedDetailPresenter.onInputSendMessage(inputMessageController.text.toString());
-    this.inputMessageController.clear();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.feedDetailPresenter.start(this);
+    bloc.add(InputSendMessage(comment: inputMessageController.text.toString()));
+    inputMessageController.clear();
   }
 
   @override
   void dispose() {
     inputMessageController.dispose();
     super.dispose();
-  }
-
-  @override
-  void addComment(Comment comment) {
-    setState(() {
-     this.commentList.add(comment); 
-    });
   }
 }

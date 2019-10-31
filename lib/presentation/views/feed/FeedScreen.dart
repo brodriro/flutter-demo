@@ -1,10 +1,12 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
-import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/cPost.dart';
-import 'package:DemoFlutter/presentation/views/feed/FeedPresenter.dart';
-import 'package:DemoFlutter/presentation/views/feed/FeedView.dart';
+import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
+import 'package:DemoFlutter/presentation/views/feed/bloc/FeedEvent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/FeedState.dart';
 
 class FeedScreen extends StatefulWidget {
   FeedScreen();
@@ -15,13 +17,27 @@ class FeedScreen extends StatefulWidget {
   }
 }
 
-class _FeedScreen extends State<FeedScreen> implements FeedView {
-  FeedPresenter feedPresenter = Injector.inject().resolve<FeedPresenter>();
+class _FeedScreen extends State<FeedScreen> {
+  FeedBloc bloc;
   List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
-    return (posts == null) ? CircularProgressComponent() : _buildPost();
+    return BlocProvider<FeedBloc>(
+      builder: (context) {
+        bloc = FeedBloc();
+        bloc.add(GetData());
+        return bloc;
+      },
+      child: BlocBuilder<FeedBloc, FeedState>(
+        builder: (context, state) {
+          if(state is FeedListReadyState) {
+            posts = state.feedList;
+          }
+          return (posts == null) ? CircularProgressComponent() : _buildPost();
+        },
+      ),
+    );
   }
 
   Widget _buildPost() {
@@ -36,34 +52,5 @@ class _FeedScreen extends State<FeedScreen> implements FeedView {
 
   Widget _buildRow(Post post) {
     return PostComponent(post);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initPresenter();
-  }
-
-  void initPresenter() {
-    this.feedPresenter.start(this);
-  }
-
-  @override
-  void onFeedComplete(List<Post> posts) {
-    debugPrint("onFeedComplete");
-    setState(() {
-      if (this.posts == null) this.posts = new List();
-      this.posts = posts;
-    });
-  }
-
-  @override
-  void onNetworkError() {
-    debugPrint("onNetorkError");
-  }
-
-  @override
-  void onLoading() {
-    debugPrint("onLoadingData");
   }
 }
