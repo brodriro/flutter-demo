@@ -1,8 +1,7 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
-import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/components/cComment.dart';
-import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailPresenter.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailView.dart';
+import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailBloc.dart';
 import 'package:flutter/material.dart';
 
 class FeedDetailScreen extends StatefulWidget {
@@ -16,10 +15,8 @@ class FeedDetailScreen extends StatefulWidget {
 
 class _FeedDetailScreenState extends State<FeedDetailScreen>
     implements FeedDetailView {
-  FeedDetailPresenter feedDetailPresenter =
-      Injector.inject().resolve<FeedDetailPresenter>();
   List<Comment> commentList;
-
+  FeedDetailbloc bloc;
   final inputMessageController = new TextEditingController();
 
   @override
@@ -125,12 +122,6 @@ class _FeedDetailScreenState extends State<FeedDetailScreen>
         .feedDetailPresenter
         .onInputSendMessage(inputMessageController.text.toString());
     this.inputMessageController.clear();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.feedDetailPresenter.start(this);
   }
 
   @override
