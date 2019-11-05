@@ -8,9 +8,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-@immutable
-class UserScreen extends StatelessWidget {
+
+class UserScreen extends StatefulWidget {
+  @override
+  _UserScreenState createState() => _UserScreenState();
+}
+
+class _UserScreenState extends State<UserScreen> {
   List<User> _friendsList;
+
   UserBloc _bloc;
 
   @override
@@ -47,5 +53,10 @@ class UserScreen extends StatelessWidget {
 
   Widget _buildRow(User user) {
     return RowUserProfile(user);
+  }
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
   }
 }
