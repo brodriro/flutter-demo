@@ -1,4 +1,5 @@
 import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:flutter/material.dart';
 
 class ProfileComponent extends StatelessWidget {
@@ -8,29 +9,39 @@ class ProfileComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[_header(), _body()],
+    return Container(
+      color: ThemeColor.primaryColor,
+      child: Column(
+        children: <Widget>[_header(), _body()],
+      ),
     );
   }
 
   Widget _body() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        textDirection: TextDirection.ltr,
-        children: <Widget>[
-          _textTitle("Name"),
-          _textDescription(
-              (_user == null) ? "" : "${_user.getName} ${_user.getLastName}"),
-          _textTitle("Age"),
-          _textDescription((_user == null) ? "" : "${_user.getAge} years"),
-          _textTitle("Email"),
-          _textDescription((_user == null) ? "" : _user.getEmail),
-          _textTitle("Location"),
-          _textDescription((_user == null) ? "" : _user.getLocation),
-          _textTitle("Occupation"),
-          _textDescription((_user == null) ? "" : _user.getOccupation),
-        ],
+    return Expanded(
+      child: Container(
+        decoration: new BoxDecoration(
+          color: ThemeColor.whiteColor,
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(30),
+              topRight: Radius.circular(30)),
+        ),
+        padding: EdgeInsets.all(20),
+        child: Column(
+          textDirection: TextDirection.ltr,
+          children: <Widget>[
+            _textTitle("Name"),
+            _textDescription(
+                (_user == null) ? "" : "${_user.getName} ${_user.getLastName}"),
+            _textTitle("Age"),
+            _textDescription((_user == null) ? "" : "${_user.getAge} years"),
+            _textTitle("Email"),
+            _textDescription((_user == null) ? "" : _user.getEmail),
+            _textTitle("Location"),
+            _textDescription((_user == null) ? "" : _user.getLocation),
+            _textTitle("Occupation"),
+            _textDescription((_user == null) ? "" : _user.getOccupation),
+          ],
+        ),
       ),
     );
   }
@@ -38,78 +49,69 @@ class ProfileComponent extends StatelessWidget {
   Widget _header() {
     Social social = (_user != null) ? _user.getSocial : null;
     return Container(
-      margin: EdgeInsets.only(top: 35),
-      child: Card(
-        elevation: 2,
-        margin: EdgeInsets.all(0),
-        color: Colors.blueAccent,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(90),
-          topLeft: Radius.circular(90),
-        )),
-        child: Container(
-          height: 142,
-          padding: EdgeInsets.all(10),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: (_user == null)
-                              ? AssetImage("assets/images/avatar_default.jpg")
-                              : NetworkImage(_user.getImage),
-                        ),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 15.0,
-                              offset: Offset(0.0, 6.0))
-                        ]),
-                  ),
+      color: ThemeColor.primaryColor,
+      margin: EdgeInsets.only(top: 30),
+      child: Container(
+        height: 142,
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: (_user == null)
+                            ? AssetImage("assets/images/avatar_default.jpg")
+                            : NetworkImage(_user.getImage),
+                      ),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: Colors.black38,
+                            blurRadius: 15.0,
+                            offset: Offset(0.0, 6.0))
+                      ]),
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                    margin: EdgeInsets.only(left: 8),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Column(children: <Widget>[
-                          _textTitle("Likes", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getLikes}" : "0",
-                              white: true),
-                          _textTitle("Shares", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getLikes}" : "0",
-                              white: true),
-                        ])),
-                        Expanded(
-                            child: Column(children: <Widget>[
-                          _textTitle("Posts", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getPost}" : "0",
-                              white: true),
-                          _textTitle("Friends", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getFriends}" : "0",
-                              white: true),
-                        ])),
-                      ],
-                    )),
-              ),
-            ],
-          ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                  margin: EdgeInsets.only(left: 8),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: Column(children: <Widget>[
+                        _textTitle("Likes", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getLikes}" : "0",
+                            white: true),
+                        _textTitle("Shares", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getLikes}" : "0",
+                            white: true),
+                      ])),
+                      Expanded(
+                          child: Column(children: <Widget>[
+                        _textTitle("Posts", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getPost}" : "0",
+                            white: true),
+                        _textTitle("Friends", white: true),
+                        _textDescription(
+                            (social != null) ? "${social.getFriends}" : "0",
+                            white: true),
+                      ])),
+                    ],
+                  )),
+            ),
+          ],
         ),
       ),
     );
