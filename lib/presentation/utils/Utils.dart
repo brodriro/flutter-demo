@@ -7,7 +7,7 @@ class ThemeColor {
   static final Color primaryDarkColor = Colors.indigo;
   static final Color colorAccent = Colors.indigoAccent;
   static final Color backgroundRow = Colors.grey[200];
-  static final Color colorText = Colors.grey[850];
+  static final Color colorText = Colors.grey[700];
   static final Color whiteColor = Colors.white;
 }
 
