@@ -19,10 +19,12 @@ class DemoApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Demo Flutter App',
       theme: ThemeData(
+          primaryColor: ThemeColor.primaryColor,
           accentColor: ThemeColor.colorAccent,
           primaryColorDark: ThemeColor.primaryColor,
-          fontFamily: CustomFont.raleway),
-      initialRoute: RouteScreen.login,
+          fontFamily: CustomFont.roboto),
+      initialRoute: RouteScreen.home,
+      debugShowCheckedModeBanner: false,
       routes: {
         RouteScreen.login: (context) => LoginScreen(),
         RouteScreen.home: (context) => HomeScreen(),

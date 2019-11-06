@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PostComponent extends StatelessWidget {
-  Post post;
-
-  PostComponent(this.post);
 
   BuildContext context;
+  Post post;
+
+
+  PostComponent({@required this.post});
 
   @override
   Widget build(BuildContext context) {

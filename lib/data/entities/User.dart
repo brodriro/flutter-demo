@@ -8,6 +8,7 @@ class User {
   String _age;
   String _email;
   String _location;
+  String _phoneNumber;
   Social _social;
 
   User(
@@ -20,6 +21,7 @@ class User {
     this._age,
     this._email,
     this._location,
+    this._phoneNumber,
     this._social,
   );
   int get getId => this._id;
@@ -32,6 +34,8 @@ class User {
   String get getEmail => this._email;
   String get getLocation => this._location;
   Social get getSocial => this._social;
+
+  get getPhoneNumber => this._phoneNumber;
 }
 
 class Social {

@@ -1,144 +1,214 @@
 import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ProfileComponent extends StatelessWidget {
+class ProfileComponent extends StatefulWidget {
   final User _user;
 
   ProfileComponent(this._user);
 
   @override
+  _ProfileComponentState createState() => _ProfileComponentState();
+}
+
+class _ProfileComponentState extends State<ProfileComponent>
+    with TickerProviderStateMixin {
+  Social social;
+
+  AnimationController controller;
+
+  CurvedAnimation animation;
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[_header(), _body()],
+    social = (widget._user != null) ? widget._user.getSocial : null;
+    return Container(
+      child: Stack(
+        children: <Widget>[header(), cardProfile(), newBody()],
+      ),
     );
   }
 
-  Widget _body() {
+  Widget newBody() {
     return Container(
-      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.only(top: 330),
+      padding: EdgeInsets.all(16),
       child: Column(
-        textDirection: TextDirection.ltr,
         children: <Widget>[
-          _textTitle("Name"),
-          _textDescription(
-              (_user == null) ? "" : "${_user.getName} ${_user.getLastName}"),
-          _textTitle("Age"),
-          _textDescription((_user == null) ? "" : "${_user.getAge} years"),
-          _textTitle("Email"),
-          _textDescription((_user == null) ? "" : _user.getEmail),
-          _textTitle("Location"),
-          _textDescription((_user == null) ? "" : _user.getLocation),
-          _textTitle("Occupation"),
-          _textDescription((_user == null) ? "" : _user.getOccupation),
+          rowInfoProfile(Icons.person, "Age", widget._user.getAge,
+              animationDuration: 500),
+          rowInfoProfile(Icons.mail, "Email", widget._user.getEmail,
+              animationDuration: 600),
+          rowInfoProfile(Icons.work, "Occupation", widget._user.getOccupation,
+              animationDuration: 700),
+          rowInfoProfile(
+              Icons.phone_android, "Phone", widget._user.getPhoneNumber,
+              animationDuration: 800)
         ],
       ),
     );
   }
 
-  Widget _header() {
-    Social social = (_user != null) ? _user.getSocial : null;
+  Widget header() {
     return Container(
-      margin: EdgeInsets.only(top: 35),
-      child: Card(
-        elevation: 2,
-        margin: EdgeInsets.all(0),
-        color: Colors.blueAccent,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(90),
-          topLeft: Radius.circular(90),
-        )),
-        child: Container(
-          height: 142,
-          padding: EdgeInsets.all(10),
-          child: Row(
+      height: 220,
+      color: ThemeColor.primaryColor,
+      child: Container(),
+    );
+  }
+
+  Widget cardProfile() {
+    return Container(
+      margin: EdgeInsets.only(top: 50, left: 24, right: 24),
+      child: Stack(
+        children: <Widget>[
+          Column(
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: (_user == null)
-                              ? AssetImage("assets/images/avatar_default.jpg")
-                              : NetworkImage(_user.getImage),
-                        ),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 15.0,
-                              offset: Offset(0.0, 6.0))
-                        ]),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                    margin: EdgeInsets.only(left: 8),
-                    child: Row(
+              Container(
+                decoration: BoxDecoration(
+                    color: ThemeColor.whiteColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 1.0,
+                          offset: Offset(0.0, 1.0))
+                    ]),
+                margin: EdgeInsets.only(top: 50),
+                padding:
+                    EdgeInsets.only(top: 64, left: 16, right: 16, bottom: 24),
+                child: Column(
+                  children: <Widget>[
+                    _textTitle(
+                        "${widget._user.getName} ${widget._user.getLastName}",
+                        alignment: Alignment.center),
+                    Container(
+                      margin: EdgeInsets.only(top: 4, bottom: 42),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.location_on,
+                              color: ThemeColor.colorAccent, size: 14),
+                          Container(width: 6),
+                          _textDescription(widget._user.getLocation,
+                              fontSize: 14, color: ThemeColor.colorAccent)
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Expanded(
-                            child: Column(children: <Widget>[
-                          _textTitle("Likes", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getLikes}" : "0",
-                              white: true),
-                          _textTitle("Shares", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getLikes}" : "0",
-                              white: true),
-                        ])),
-                        Expanded(
-                            child: Column(children: <Widget>[
-                          _textTitle("Posts", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getPost}" : "0",
-                              white: true),
-                          _textTitle("Friends", white: true),
-                          _textDescription(
-                              (social != null) ? "${social.getFriends}" : "0",
-                              white: true),
-                        ])),
+                        socialColumn(title: "LIKES", count: social.getLikes),
+                        socialColumn(title: "SHARES", count: social.getShares),
+                        socialColumn(title: "POSTS", count: social.getPost),
+                        socialColumn(title: "FRIENDS", count: social.getFriends)
                       ],
-                    )),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
-        ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: (widget._user.getImage == null)
+                        ? AssetImage("assets/images/avatar_default.jpg")
+                        : NetworkImage(widget._user.getImage),
+                  ),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 1),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 8.0,
+                        offset: Offset(0.0, 6.0))
+                  ]),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _textTitle(String title, {bool white}) {
+  Widget _textTitle(String title,
+      {Alignment alignment, double fontSize, Color color}) {
+    if (alignment == null) alignment = Alignment.centerLeft;
+    if (fontSize == null) fontSize = 18;
+    if (color == null) color = ThemeColor.colorText;
     return Container(
-        alignment: Alignment.centerLeft,
-        margin: EdgeInsets.only(bottom: 2, top: 15),
+        alignment: alignment,
         child: Text(
           title,
           textAlign: TextAlign.left,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: fontSize,
             fontWeight: FontWeight.w700,
-            color: (white != null) ? Colors.white : Colors.black54,
+            color: color,
           ),
         ));
   }
 
-  Widget _textDescription(String title, {bool white}) {
+  Widget _textDescription(String title,
+      {Alignment alignment, double fontSize, Color color}) {
+    if (alignment == null) alignment = Alignment.centerLeft;
+    if (fontSize == null) fontSize = 16;
+    if (color == null) color = ThemeColor.colorText;
+
     return Container(
-        alignment: Alignment.centerLeft,
+        alignment: alignment,
         child: Text(
           title,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-              fontSize: 16,
-              color: (white != null) ? Colors.white : Colors.black54),
+          style: TextStyle(fontSize: fontSize, color: color),
         ));
+  }
+
+  Widget socialColumn({String title, int count}) {
+    return Expanded(
+      flex: 1,
+      child: Column(
+        children: <Widget>[
+          _textTitle(title,
+              fontSize: 14,
+              alignment: Alignment.center,
+              color: ThemeColor.colorText.withOpacity(0.8)),
+          _textDescription(count.toString(),
+              fontSize: 18, alignment: Alignment.center)
+        ],
+      ),
+    );
+  }
+
+  Widget rowInfoProfile(IconData icon, String title, String content,
+      {@required int animationDuration}) {
+    controller = AnimationController(
+        duration: Duration(milliseconds: animationDuration), vsync: this);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+    controller.forward();
+
+    return FadeTransition(
+      opacity: animation,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 24),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(icon, color: ThemeColor.colorAccent, size: 18),
+                _textDescription(title,
+                    fontSize: 18, color: ThemeColor.colorAccent)
+              ],
+            ),
+            _textDescription(content, fontSize: 20)
+          ],
+        ),
+      ),
+    );
   }
 }

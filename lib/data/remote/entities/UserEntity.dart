@@ -26,6 +26,7 @@ class UserEntity {
   String age;
   String email;
   String location;
+  String phoneNumber;
   SocialEntity socialEntity;
 
   UserEntity({
@@ -38,6 +39,7 @@ class UserEntity {
     this.age,
     this.email,
     this.location,
+    this.phoneNumber,
     this.socialEntity,
   });
 
@@ -51,6 +53,7 @@ class UserEntity {
         age: json["age"],
         email: json["email"],
         location: json["location"],
+        phoneNumber: json["phone"],
         socialEntity: SocialEntity.fromJson(json["social"]),
       );
 
@@ -78,6 +81,7 @@ class UserEntity {
         userEntity.age,
         userEntity.email,
         userEntity.location,
+        userEntity.phoneNumber,
         SocialEntity.toSocial(userEntity.socialEntity));
   }
 

@@ -57,4 +57,9 @@ class _ProfileScreen extends State<ProfileScreen> {
   void initState() {
     super.initState();
   }
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
 }
