@@ -20,10 +20,14 @@ class _UserScreenState extends State<UserScreen> {
   UserBloc _bloc;
 
   @override
+  void initState() {
+    _bloc = UserBloc();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<UserBloc>(
       builder: (context) {
-        _bloc = UserBloc();
         _bloc.add(UserGetAllFriendsEvent());
         return _bloc;
       },

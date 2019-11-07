@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    _loginBloc = LoginBloc();
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
     super.initState();
@@ -27,15 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: ThemeColor.backgroundRow,
       body: BlocProvider<LoginBloc>(
-        builder: (context) {
-          _loginBloc = LoginBloc();
-          return _loginBloc;
-        },
+        builder: (context) => _loginBloc,
         child: BlocListener<LoginBloc, LoginState>(
-          listener: (context, state){
+          listener: (context, state) {
             if (state.isSuccess) {
               _onLoginSuccess(context);
             }

@@ -22,7 +22,6 @@ class _ProfileScreen extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<ProfileBloc>(
       builder: (context) {
-        bloc = ProfileBloc();
         bloc.add(GetProfile());
         return bloc;
       },
@@ -55,8 +54,10 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   void initState() {
+    bloc = ProfileBloc();
     super.initState();
   }
+
   @override
   void dispose() {
     bloc.close();

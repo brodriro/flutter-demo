@@ -29,10 +29,15 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
   final int totalDuration = 3500;
 
   @override
+  void initState() {
+    bloc = FeedBloc();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<FeedBloc>(
       builder: (context) {
-        bloc = FeedBloc();
         bloc.add(GetData());
         return bloc;
       },
