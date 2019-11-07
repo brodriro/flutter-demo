@@ -16,15 +16,13 @@ class FeedDetailScreen extends StatefulWidget {
 }
 
 class _FeedDetailScreenState extends State<FeedDetailScreen> {
-  List<Comment> commentList;
+  List<Comment> commentList = new List<Comment>();
   FeedDetailBloc bloc;
   final inputMessageController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    commentList = (widget.post.getComments == null)
-        ? new List<Comment>()
-        : widget.post.getComments;
+    if (widget.post.getComments != null) commentList = widget.post.getComments;
 
     return new Scaffold(
       backgroundColor: Colors.blue,

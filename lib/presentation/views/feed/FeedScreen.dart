@@ -1,7 +1,7 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
 import 'package:DemoFlutter/presentation/views/components/ItemFade.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
-import 'package:DemoFlutter/presentation/views/components/cPost.dart';
+import 'package:DemoFlutter/presentation/views/components/PostComponent.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedEvent.dart';
 import 'package:flutter/material.dart';

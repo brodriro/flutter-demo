@@ -1,14 +1,14 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/components/RoundedImage.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PostComponent extends StatelessWidget {
-
   BuildContext context;
   Post post;
-
 
   PostComponent({@required this.post});
 
@@ -53,20 +53,31 @@ class PostComponent extends StatelessWidget {
 
   Widget bodyCard(String image, String textPost) {
     return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      height: 192,
+      child: Stack(
+        // mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            height: 140,
+            height: 192,
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(image), fit: BoxFit.cover),
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Text(textPost),
-          ),
+          Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                width: double.maxFinite,
+                  color: ThemeColor.colorText.withOpacity(0.65),
+                  padding: EdgeInsets.all(8),
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    direction: Axis.horizontal,
+                    //mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Text(textPost, style: TextStyle(color: ThemeColor.whiteColor),),
+                    ],
+                  )))
         ],
       ),
     );
@@ -74,41 +85,53 @@ class PostComponent extends StatelessWidget {
 
   Widget footerCard(String likes) {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      height: 50,
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.star,
-            color: Colors.blueAccent,
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 5, right: 15),
-            child: Text(
-              likes,
-              style: TextStyle(
-                  color: Colors.blueAccent, fontWeight: FontWeight.w700),
-            ),
-          ),
-          RaisedButton(
-            onPressed: () => onClickComment(this.context),
-            color: Colors.grey[100],
-            disabledColor: Colors.transparent,
+          Expanded(
+            flex: 1,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  Icons.add_comment,
-                  color: Colors.blueAccent,
+                IconButton(
+                  icon: Icon(CupertinoIcons.heart_solid,
+                      color: ThemeColor.colorAccent),
                 ),
-                Text(
-                  "Comment",
-                  style: TextStyle(
-                    color: Colors.blueAccent,
+                Container(
+                  margin: EdgeInsets.only(right: 15),
+                  child: Text(
+                    likes,
+                    style: TextStyle(
+                        color: Colors.blueAccent, fontWeight: FontWeight.w700),
                   ),
-                )
+                ),
               ],
             ),
-            padding: EdgeInsets.all(5),
           ),
+          Expanded(
+            flex: 1,
+            child: InkWell(
+              onTap: () => onClickComment(this.context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.comment,
+                    color: Colors.blueAccent,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 4),
+                  ),
+                  Text(
+                    "Comment",
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
