@@ -1,4 +1,5 @@
 import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/components/cComment.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailBloc.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailEvent.dart';
@@ -16,27 +17,31 @@ class FeedDetailScreen extends StatefulWidget {
 }
 
 class _FeedDetailScreenState extends State<FeedDetailScreen> {
-  List<Comment> commentList;
+  List<Comment> commentList = new List<Comment>();
   FeedDetailBloc bloc;
   final inputMessageController = new TextEditingController();
 
+  var listKey = GlobalKey<AnimatedListState>();
+
+  @override
+  void initState() {
+    bloc = FeedDetailBloc();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    commentList = (widget.post.getComments == null)
-        ? new List<Comment>()
-        : widget.post.getComments;
+    if (widget.post.getComments != null) commentList = widget.post.getComments;
 
     return new Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: ThemeColor.primaryColor,
       body: BlocProvider<FeedDetailBloc>(
-          builder: (context) {
-            bloc = FeedDetailBloc();
-            return bloc;
-          },
+          builder: (context) => bloc,
           child: BlocListener<FeedDetailBloc, FeedDetailState>(
             listener: (context, state) {
               if (state is AddComment) {
                 this.commentList.add(state.comment);
+                listKey.currentState.insertItem(this.commentList.length - 1);
               }
             },
             child: BlocBuilder<FeedDetailBloc, FeedDetailState>(
@@ -115,22 +120,28 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
 
     return Container(
       child: Expanded(
-        child: new ListView.builder(
-          itemCount: commentList.length,
+        child: AnimatedList(
+          key: listKey,
+          initialItemCount: commentList.length,
           padding: const EdgeInsets.all(4),
-          itemBuilder: (BuildContext _context, int i) {
-            return rowList(commentList[i]);
+          itemBuilder: (BuildContext _context, int index, Animation<double> animation) {
+            return rowList(commentList[index], animation, index);
           },
         ),
       ),
     );
   }
 
-  Widget rowList(Comment comment) {
-    return CommentComponent(
-      comment.getComment,
-      networkImage: comment.getUserImage,
-      onClickImage: () {},
+  Widget rowList(Comment comment, Animation<double> animation, int index) {
+    Animatable<Offset> custom =
+        Tween<Offset>(begin: Offset(0, 1), end: Offset.zero);
+    return SlideTransition(
+      position: animation.drive(custom),
+      child: CommentComponent(
+        comment.getComment,
+        networkImage: comment.getUserImage,
+        onClickImage: () {},
+      ),
     );
   }
 

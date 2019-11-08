@@ -165,6 +165,7 @@ class _ProfileComponentState extends State<ProfileComponent>
         alignment: alignment,
         child: Text(
           title,
+          textAlign: TextAlign.left,
           style: TextStyle(fontSize: fontSize, color: color),
         ));
   }
@@ -195,17 +196,26 @@ class _ProfileComponentState extends State<ProfileComponent>
     return FadeTransition(
       opacity: animation,
       child: Container(
-        margin: EdgeInsets.only(bottom: 24),
         child: Column(
           children: <Widget>[
             Row(
               children: <Widget>[
-                Icon(icon, color: ThemeColor.colorAccent, size: 18),
-                _textDescription(title,
-                    fontSize: 18, color: ThemeColor.colorAccent)
+                Icon(icon, color: ThemeColor.colorAccent, size: 24),
+                Padding(padding: EdgeInsets.only(left: 12)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    _textDescription(title,
+                        fontSize: 20, color: ThemeColor.colorAccent),
+                    _textDescription(content, fontSize: 20)
+                  ],
+                )
               ],
             ),
-            _textDescription(content, fontSize: 20)
+            Container(
+                margin: EdgeInsets.only(top: 20, bottom: 20),
+                height: 1,
+                color: ThemeColor.backgroundRow),
           ],
         ),
       ),

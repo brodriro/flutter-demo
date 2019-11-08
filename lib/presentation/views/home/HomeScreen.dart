@@ -25,6 +25,7 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   void initState() {
+    _bloc = HomeBloc();
     super.initState();
   }
 
@@ -39,10 +40,7 @@ class _HomeState extends State<HomeScreen> {
 
     return Scaffold(
       body: BlocProvider<HomeBloc>(
-        builder: (context) {
-          _bloc = HomeBloc();
-          return _bloc;
-        },
+        builder: (context) => _bloc,
         child: BlocListener<HomeBloc, HomeState>(
           listener: (context, state) {
             debugPrint("Current State- Listener: $state");

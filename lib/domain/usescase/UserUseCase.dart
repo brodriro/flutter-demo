@@ -20,15 +20,15 @@ class UserUseCase {
     return await this.userRepositoryRemote.getFriends();
   }
 
-
   Future login(String user, String password) async {
-    UserAuth userAuth =  await this.userRepositoryRemote.login(user, password);
+    UserAuth userAuth = await this.userRepositoryRemote.login(user, password);
     saveUser(UserEntity.toUserEntity(userAuth));
   }
 
   Future<UserAuth> getUserFromDB() async {
     return await this.userRepositoryLocal.getUser();
   }
+
   Future saveUser(UserEntity userEntity) async {
     await this.userRepositoryLocal.saveUser(userEntity);
   }
