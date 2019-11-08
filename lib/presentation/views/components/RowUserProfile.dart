@@ -13,46 +13,40 @@ class RowUserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String title = (this._user == null)
-        ? "Full name"
-        : "${this._user.getName} ${this._user.getLastName}";
-
-    String age =
-        (this._user == null) ? "0 years" : "${this._user.getAge} years";
-    String username =
-        (this._user == null) ? "Username" : this._user.getUsername;
+    String title = "${this._user.getName} ${this._user.getLastName}";
+    String age = "${this._user.getAge} years";
+    String username = this._user.getUsername;
 
     String subtitle = "$username - $age";
-    String image = (this._user == null) ? null : this._user.getImage;
+    String image = (this._user.getImage.isEmpty) ? null : this._user.getImage;
 
     return Container(
       margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        color: ThemeColor.backgroundRow,
-      ),
       child: GestureDetector(
         onTap: onClickRow,
-        child: Row(
+        child: Stack(
+          alignment: Alignment.center,
           children: <Widget>[
+
             Container(
-              child: RoundedImageComponent(
-                size: 48,
-                network: image,
+              height: 64,
+              width: double.maxFinite,
+              padding:
+                  EdgeInsets.only(left: 36, right: 12, top: 12, bottom: 12),
+              margin: EdgeInsets.only(left: 36),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: ThemeColor.backgroundRow,
               ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.start,
+                direction: Axis.vertical,
                 children: <Widget>[
-                  Text(
-                    title,
-                    style: TextStyle(
-                        color: ThemeColor.colorText,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  Text(title,
+                      style: TextStyle(
+                          color: ThemeColor.colorText,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
                   Text(
                     subtitle,
                     style: TextStyle(color: ThemeColor.colorText, fontSize: 14),
@@ -60,6 +54,15 @@ class RowUserProfile extends StatelessWidget {
                 ],
               ),
             ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: RoundedImageComponent(
+                  size: 64,
+                  network: image,
+                ),
+              ),
+            )
           ],
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
-import 'package:DemoFlutter/presentation/views/components/cProfile.dart';
+import 'package:DemoFlutter/presentation/views/components/ProfileComponent.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileBloc.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileEvent.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileState.dart';
