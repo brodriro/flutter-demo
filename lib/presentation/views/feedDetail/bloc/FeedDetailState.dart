@@ -12,7 +12,7 @@ abstract class FeedDetailState extends Equatable {
 class InitialState extends FeedDetailState {}
 
 class InputEmpty extends FeedDetailState{
-  String text;
+  final String text;
   InputEmpty({@required this.text});
 
   @override
@@ -21,7 +21,7 @@ class InputEmpty extends FeedDetailState{
 
 class AddComment extends FeedDetailState{
 
-  Comment comment;
+  final Comment comment;
 
   AddComment({@required this.comment});
 
