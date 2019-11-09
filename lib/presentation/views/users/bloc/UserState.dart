@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

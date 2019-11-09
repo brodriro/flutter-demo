@@ -1,5 +1,5 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
-import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
 import 'package:DemoFlutter/domain/usescase/UserUseCase.dart';
 import 'package:DemoFlutter/presentation/di/Injector.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailEvent.dart';

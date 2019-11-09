@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen();
+ const ProfileScreen( {Key key}): super(key:key);
 
   @override
   State<StatefulWidget> createState() {
@@ -16,17 +16,19 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> {
-  ProfileBloc bloc;
 
+  ProfileBloc bloc = ProfileBloc();
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider<ProfileBloc>(
-      builder: (context) {
-        bloc.add(GetProfile());
-        return bloc;
-      },
+      builder: (context) =>  bloc,
       child: BlocBuilder<ProfileBloc, ProfileState>(
+        bloc: bloc,
         builder: (context, state) {
+          if(state is InitialState) { //Evita que al recuperar el estado se repliquen las llamadas a la API
+            bloc.add(GetProfile());
+          }
           if (state is LoadingState) {
             return CircularProgressComponent();
           }
@@ -54,13 +56,13 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   void initState() {
-    bloc = ProfileBloc();
     super.initState();
   }
 
   @override
   void dispose() {
-    bloc.close();
+    debugPrint("ProfileScreen dispose()");
+   // bloc.close();
     super.dispose();
   }
 }

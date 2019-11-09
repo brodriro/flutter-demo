@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:DemoFlutter/data/entities/User.dart';
-import 'package:DemoFlutter/data/entities/UserAuth.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/UserAuth.dart';
 import 'package:DemoFlutter/data/remote/entities/UserAuthEntity.dart';
 import 'package:DemoFlutter/data/remote/entities/UserEntity.dart';
 import 'package:DemoFlutter/data/remote/network/ApiURL.dart';

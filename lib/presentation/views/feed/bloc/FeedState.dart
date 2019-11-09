@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 

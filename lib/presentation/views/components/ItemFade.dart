@@ -36,12 +36,15 @@ class _ItemFade extends State<ItemFade> {
         ),
       ),
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(opacity: _animation.value, child: widget.child);
+    return AnimatedOpacity(
+        opacity: _animation.value,
+        duration: Duration(milliseconds: widget.duration.toInt()),
+        child: widget.child);
   }
 }

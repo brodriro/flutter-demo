@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:DemoFlutter/data/remote/entities/PostEntity.dart';
 import 'package:DemoFlutter/data/remote/network/ApiURL.dart';
 import 'package:DemoFlutter/domain/repository/post/PostRepositoryRemote.dart';
