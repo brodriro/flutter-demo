@@ -18,6 +18,7 @@ class _HomeState extends State<HomeScreen> {
   int indexTap = 0;
 
   void onTapTapped(int index) {
+    if( indexTap == index) return;
     setState(() {
       indexTap = index;
     });
@@ -31,7 +32,6 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //this.widget.homePresenter.getTestAuth();
     final List<Widget> widgetsChildren = [
       ProfileScreen(),
       FeedScreen(),

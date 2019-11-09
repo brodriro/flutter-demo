@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
 
 List<UserEntity> listUserEntityFromJson(String str) {
   final jsonData = json.decode(str);

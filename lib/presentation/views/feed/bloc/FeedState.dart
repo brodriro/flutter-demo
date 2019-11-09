@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -14,7 +14,7 @@ class InitialState extends FeedState {}
 class LoadingState extends FeedState {}
 
 class FeedListReadyState extends FeedState {
-  List<Post> feedList;
+  final List<Post> feedList;
 
   FeedListReadyState({@required this.feedList});
 
@@ -23,7 +23,7 @@ class FeedListReadyState extends FeedState {
 }
 
 class ErrorState extends FeedState{
-  String error;
+ final  String error;
 
   ErrorState({@required this.error});
   @override

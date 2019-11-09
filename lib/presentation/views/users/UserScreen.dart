@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/RowUserProfile.dart';
 import 'package:DemoFlutter/presentation/views/users/bloc/UserBloc.dart';

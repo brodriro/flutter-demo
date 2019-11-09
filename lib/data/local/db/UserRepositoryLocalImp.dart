@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/UserAuth.dart';
+import 'package:DemoFlutter/domain/entities/UserAuth.dart';
 import 'package:DemoFlutter/data/local/DatabaseHelper.dart';
 import 'package:DemoFlutter/data/local/entities/UserEntity.dart';
 import 'package:DemoFlutter/domain/repository/user/UserRepositoryLocal.dart';

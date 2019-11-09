@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 
 abstract class PostRepositoryRemote {
   

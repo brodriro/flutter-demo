@@ -1,5 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
-import 'package:DemoFlutter/presentation/views/components/ItemFade.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/PostComponent.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
@@ -21,12 +20,10 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
   FeedBloc bloc;
   List<Post> posts;
-  final listKey = GlobalKey<AnimatedListState>();
 
   AnimationController _animationController;
-  double animationDuration = 0.0;
-  int totalItems = 6; //default
-  final int totalDuration = 3500;
+  Animation<double> _animation;
+  final int totalDuration = 500;
 
   @override
   void initState() {
@@ -54,11 +51,8 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildPost() {
-    totalItems = posts.length;
     buildAnimationController();
     return AnimatedList(
-      //  key: listKey,
-
       initialItemCount: posts.length,
       padding: EdgeInsets.all(16.0),
       itemBuilder: (context, index, animation) {
@@ -70,16 +64,26 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
   void buildAnimationController() {
     _animationController = AnimationController(
         vsync: this, duration: new Duration(milliseconds: totalDuration));
-    animationDuration = totalDuration / (100 * (totalDuration / totalItems));
+
+    _animation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _animationController.forward();
   }
 
   Widget _buildRow(Post post, int index, int totalItems) {
-    return ItemFade(
-      index: index,
-      animationController: _animationController,
-      duration: animationDuration,
+    int duration = _animationController.duration.inMilliseconds;
+    double durationInMillis = (duration + ((duration / totalItems) * index));
+
+    return AnimatedBuilder(
       child: PostComponent(post: post),
+      animation: _animation,
+      builder: (context, child) {
+        return AnimatedOpacity(
+          opacity: _animation.value,
+          duration: Duration(milliseconds: durationInMillis.toInt()),
+          child: child,
+        );
+      },
     );
   }
 

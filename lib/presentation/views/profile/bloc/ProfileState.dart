@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/User.dart';
+import 'package:DemoFlutter/domain/entities/User.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -14,7 +14,7 @@ class InitialState extends ProfileState {}
 class LoadingState extends ProfileState {}
 
 class UserReadyState extends ProfileState {
-  User user;
+  final User user;
 
   UserReadyState({@required this.user});
 
@@ -23,7 +23,7 @@ class UserReadyState extends ProfileState {
 }
 
 class ErrorState extends ProfileState {
-  String error;
+  final String error;
 
   ErrorState({@required this.error});
 

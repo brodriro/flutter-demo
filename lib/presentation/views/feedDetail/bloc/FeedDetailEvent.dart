@@ -9,7 +9,7 @@ abstract class FeedDetailEvent extends Equatable {
 }
 
 class InputSendMessage extends FeedDetailEvent {
-  String comment;
+  final String comment;
 
   InputSendMessage({@required this.comment});
 

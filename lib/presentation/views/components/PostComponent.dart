@@ -1,4 +1,4 @@
-import 'package:DemoFlutter/data/entities/Post.dart';
+import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/components/RoundedImage.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailScreen.dart';
