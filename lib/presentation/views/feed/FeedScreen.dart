@@ -1,4 +1,5 @@
 import 'package:DemoFlutter/domain/entities/Post.dart';
+import 'package:DemoFlutter/presentation/utils/KeyManager.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/PostComponent.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/FeedState.dart';
 
 class FeedScreen extends StatefulWidget {
-  FeedScreen();
+  FeedScreen({Key key}): super(key:key);
 
   @override
   State<StatefulWidget> createState() {
@@ -39,6 +40,7 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
         return bloc;
       },
       child: BlocBuilder<FeedBloc, FeedState>(
+        key: widget.key,
         builder: (context, state) {
           if (state is FeedListReadyState) {
             posts = state.feedList;

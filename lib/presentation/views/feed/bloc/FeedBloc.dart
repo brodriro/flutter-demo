@@ -35,11 +35,10 @@ class FeedBloc extends HydratedBloc<FeedEvent, FeedState> {
 
   @override
   Map<String, dynamic> toJson(FeedState state) {
-    debugPrint("toJson : $state");
-    if (state is FeedListReadyState) {
+  /*  if (state is FeedListReadyState) {
       var json = state.feedList.map((e) => e.toJson()).toList();
       return {"saveFeedList": json};
-    }
+    }*/
     return null;
   }
 
