@@ -1,3 +1,4 @@
+import 'package:DemoFlutter/presentation/utils/KeyManager.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/feed/FeedScreen.dart';
 import 'package:DemoFlutter/presentation/views/home/bloc/HomeBloc.dart';
@@ -34,7 +35,7 @@ class _HomeState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> widgetsChildren = [
       ProfileScreen(),
-      FeedScreen(),
+      FeedScreen(key: KeyManager.screenFeed),
       UserScreen()
     ];
 
