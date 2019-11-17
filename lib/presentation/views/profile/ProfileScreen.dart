@@ -24,6 +24,7 @@ class _ProfileScreen extends State<ProfileScreen> {
     return BlocProvider<ProfileBloc>(
       builder: (context) =>  bloc,
       child: BlocBuilder<ProfileBloc, ProfileState>(
+        key: widget.key,
         bloc: bloc,
         builder: (context, state) {
           if(state is InitialState) { //Evita que al recuperar el estado se repliquen las llamadas a la API
