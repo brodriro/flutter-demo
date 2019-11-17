@@ -19,7 +19,7 @@ class _HomeState extends State<HomeScreen> {
   int indexTap = 0;
 
   void onTapTapped(int index) {
-    if( indexTap == index) return;
+    if (indexTap == index) return;
     setState(() {
       indexTap = index;
     });
@@ -34,9 +34,9 @@ class _HomeState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgetsChildren = [
-      ProfileScreen(),
+      ProfileScreen(key: KeyManager.screenProfile),
       FeedScreen(key: KeyManager.screenFeed),
-      UserScreen()
+      UserScreen(key: KeyManager.screenFriends)
     ];
 
     return Scaffold(

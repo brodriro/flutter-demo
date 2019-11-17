@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserScreen extends StatefulWidget {
+  const UserScreen({Key key}) : super(key: key);
+
   @override
   _UserScreenState createState() => _UserScreenState();
 }
@@ -16,33 +18,33 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> with TickerProviderStateMixin {
   List<User> _friendsList;
 
-  UserBloc _bloc;
+  UserBloc _bloc = UserBloc();
 
   AnimationController animationController;
   Animation animation;
 
   @override
   void initState() {
-    _bloc = UserBloc();
-    _bloc.add(UserGetAllFriendsEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserBloc>(
-      builder: (context) {
-        return _bloc;
-      },
+      builder: (context) => _bloc,
       child: BlocListener<UserBloc, UserState>(
-        listener: (context, state) {
-          if (state is UserListFriendsState) {
-            _friendsList = state.friends;
-          }
-        },
+        listener: (context, state) {},
         child: BlocBuilder<UserBloc, UserState>(
+          key: widget.key,
           builder: (context, state) {
-            return (_friendsList == null)
+            if (state is UserInitialState && _friendsList == null) {
+              _bloc.add(UserGetAllFriendsEvent());
+            }
+            if (state is UserListFriendsState) {
+              _friendsList = state.friends;
+            }
+
+            return (_friendsList == null || _friendsList.isEmpty)
                 ? CircularProgressComponent()
                 : buildList(_friendsList);
           },
@@ -73,7 +75,6 @@ class _UserScreenState extends State<UserScreen> with TickerProviderStateMixin {
     animation = Tween<Offset>(begin: Offset(1, 0), end: Offset.zero)
         .animate(animationController);
     animationController.forward();
-
 
     return SlideTransition(
       position: animation,
