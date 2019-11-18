@@ -1,16 +1,24 @@
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/ProfileComponent.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileBloc.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileEvent.dart';
 import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileState.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
  const ProfileScreen( {Key key}): super(key:key);
 
+
+
   @override
   State<StatefulWidget> createState() {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
     return _ProfileScreen();
   }
 }
@@ -62,6 +70,9 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   void dispose() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: ThemeColor.primaryColor,
+    ));
     debugPrint("ProfileScreen dispose()");
    // bloc.close();
     super.dispose();
