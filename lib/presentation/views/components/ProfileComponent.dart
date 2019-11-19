@@ -23,16 +23,20 @@ class _ProfileComponentState extends State<ProfileComponent>
   @override
   Widget build(BuildContext context) {
     social = (widget._user != null) ? widget._user.getSocial : null;
-    return Container(
-      child: Stack(
-        children: <Widget>[header(), cardProfile(), newBody()],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Stack(
+            children: <Widget>[newBody(), cardProfile(), header()],
+          ),
+        ),
       ),
     );
   }
 
   Widget newBody() {
     return Container(
-      margin: EdgeInsets.only(top: 330),
+      margin: EdgeInsets.only(top: 448, left: 16, right: 16),
       padding: EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
@@ -51,85 +55,76 @@ class _ProfileComponentState extends State<ProfileComponent>
   }
 
   Widget header() {
-    return Container(
-      height: 220,
-      color: ThemeColor.primaryColor,
-      child: Container(),
-    );
+    return ClipRRect(
+        child: Container(
+            height: 256,
+            decoration: BoxDecoration(
+              color: ThemeColor.primaryColor,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: (widget._user.getImage == null)
+                    ? AssetImage("assets/images/avatar_default.jpg")
+                    : NetworkImage(widget._user.getImage),
+              ),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 1.0,
+                      offset: Offset(0.0, 1.0))
+                ]
+            )),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70)));
   }
 
   Widget cardProfile() {
     return Container(
-      margin: EdgeInsets.only(top: 50, left: 24, right: 24),
-      child: Stack(
+      margin: EdgeInsets.only(top: 190),
+      child: Wrap(
+        direction: Axis.horizontal,
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
+          Container(
+            decoration: BoxDecoration(
+                color: ThemeColor.primaryColor,
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(70)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 1.0,
+                      offset: Offset(0.0, 1.0))
+                ]),
+            padding: EdgeInsets.only(top: 98, left: 16, right: 16, bottom: 32),
+            child: Column(
+              children: <Widget>[
+                _textTitle(
+                    "${widget._user.getName} ${widget._user.getLastName}",
                     color: ThemeColor.whiteColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 1.0,
-                          offset: Offset(0.0, 1.0))
-                    ]),
-                margin: EdgeInsets.only(top: 50),
-                padding:
-                    EdgeInsets.only(top: 64, left: 16, right: 16, bottom: 24),
-                child: Column(
-                  children: <Widget>[
-                    _textTitle(
-                        "${widget._user.getName} ${widget._user.getLastName}",
-                        alignment: Alignment.center),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 42),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.location_on,
-                              color: ThemeColor.colorAccent, size: 14),
-                          Container(width: 6),
-                          _textDescription(widget._user.getLocation,
-                              fontSize: 14, color: ThemeColor.colorAccent)
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        socialColumn(title: "LIKES", count: social.getLikes),
-                        socialColumn(title: "SHARES", count: social.getShares),
-                        socialColumn(title: "POSTS", count: social.getPost),
-                        socialColumn(title: "FRIENDS", count: social.getFriends)
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: (widget._user.getImage == null)
-                        ? AssetImage("assets/images/avatar_default.jpg")
-                        : NetworkImage(widget._user.getImage),
+                    alignment: Alignment.center),
+                Container(
+                  margin: EdgeInsets.only(top: 4, bottom: 42),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.location_on,
+                          color: ThemeColor.whiteColor.withOpacity(0.9),
+                          size: 14),
+                      Container(width: 6),
+                      _textDescription(widget._user.getLocation,
+                          fontSize: 14,
+                          color: ThemeColor.whiteColor.withOpacity(0.9))
+                    ],
                   ),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 1),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.black38,
-                        blurRadius: 8.0,
-                        offset: Offset(0.0, 6.0))
-                  ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    socialColumn(title: "LIKES", count: social.getLikes),
+                    socialColumn(title: "SHARES", count: social.getShares),
+                    socialColumn(title: "POSTS", count: social.getPost),
+                    socialColumn(title: "FRIENDS", count: social.getFriends)
+                  ],
+                )
+              ],
             ),
           ),
         ],
@@ -178,9 +173,11 @@ class _ProfileComponentState extends State<ProfileComponent>
           _textTitle(title,
               fontSize: 14,
               alignment: Alignment.center,
-              color: ThemeColor.colorText.withOpacity(0.8)),
+              color: ThemeColor.whiteColor.withOpacity(0.8)),
           _textDescription(count.toString(),
-              fontSize: 18, alignment: Alignment.center)
+              fontSize: 18,
+              alignment: Alignment.center,
+              color: ThemeColor.whiteColor.withOpacity(0.8))
         ],
       ),
     );
