@@ -2,6 +2,7 @@ import 'package:DemoFlutter/domain/entities/User.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileComponent extends StatefulWidget {
   final User _user;
@@ -40,14 +41,16 @@ class _ProfileComponentState extends State<ProfileComponent>
       padding: EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          rowInfoProfile(Icons.person, "Age", widget._user.getAge,
+          rowInfoProfile(FontAwesomeIcons.userAlt, "Age", widget._user.getAge,
               animationDuration: 500),
-          rowInfoProfile(Icons.mail, "Email", widget._user.getEmail,
+          rowInfoProfile(
+              FontAwesomeIcons.solidEnvelope, "Email", widget._user.getEmail,
               animationDuration: 600),
-          rowInfoProfile(Icons.work, "Occupation", widget._user.getOccupation,
+          rowInfoProfile(FontAwesomeIcons.briefcase, "Occupation",
+              widget._user.getOccupation,
               animationDuration: 700),
           rowInfoProfile(
-              Icons.phone_android, "Phone", widget._user.getPhoneNumber,
+              FontAwesomeIcons.mobile, "Phone", widget._user.getPhoneNumber,
               animationDuration: 800)
         ],
       ),
@@ -59,20 +62,19 @@ class _ProfileComponentState extends State<ProfileComponent>
         child: Container(
             height: 256,
             decoration: BoxDecoration(
-              color: ThemeColor.primaryColor,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: (widget._user.getImage == null)
-                    ? AssetImage("assets/images/avatar_default.jpg")
-                    : NetworkImage(widget._user.getImage),
-              ),
+                color: ThemeColor.primaryColor,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: (widget._user.getImage == null)
+                      ? AssetImage("assets/images/avatar_default.jpg")
+                      : NetworkImage(widget._user.getImage),
+                ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                       color: Colors.grey,
                       blurRadius: 1.0,
                       offset: Offset(0.0, 1.0))
-                ]
-            )),
+                ])),
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70)));
   }
 
@@ -105,7 +107,7 @@ class _ProfileComponentState extends State<ProfileComponent>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Icons.location_on,
+                      Icon(FontAwesomeIcons.mapMarkerAlt,
                           color: ThemeColor.whiteColor.withOpacity(0.9),
                           size: 14),
                       Container(width: 6),

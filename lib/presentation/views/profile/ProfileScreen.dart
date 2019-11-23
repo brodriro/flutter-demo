@@ -7,6 +7,7 @@ import 'package:DemoFlutter/presentation/views/profile/bloc/ProfileState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
  const ProfileScreen( {Key key}): super(key:key);
@@ -51,7 +52,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                 SnackBar(
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text('Get Profile Failure'), Icon(Icons.error)],
+                    children: [Text('Get Profile Failure'), Icon(FontAwesomeIcons.exclamationTriangle)],
                   ),
                   backgroundColor: Colors.red,
                 ),

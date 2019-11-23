@@ -6,6 +6,7 @@ import 'package:DemoFlutter/presentation/views/profile/ProfileScreen.dart';
 import 'package:DemoFlutter/presentation/views/users/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen();
@@ -65,10 +66,10 @@ class _HomeState extends State<HomeScreen> {
           currentIndex: indexTap,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline), title: Text("")),
+                icon: Icon(FontAwesomeIcons.idBadge), title: Text("")),
             BottomNavigationBarItem(
-                icon: Icon(Icons.insert_comment), title: Text("")),
-            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("")),
+                icon: Icon(FontAwesomeIcons.solidComments), title: Text("")),
+            BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.userFriends), title: Text("")),
           ],
         ),
       ),

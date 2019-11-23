@@ -4,6 +4,7 @@ import 'package:DemoFlutter/presentation/views/components/RoundedImage.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/FeedDetailScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class PostComponent extends StatelessWidget {
@@ -94,7 +95,8 @@ class PostComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
-                  icon: Icon(CupertinoIcons.heart_solid,
+                  icon: Icon(FontAwesomeIcons.solidHeart,
+                      size: 18,
                       color: ThemeColor.colorAccent),
                 ),
                 Container(
@@ -116,7 +118,7 @@ class PostComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(
-                    Icons.comment,
+                    FontAwesomeIcons.solidCommentDots,
                     color: Colors.blueAccent,
                   ),
                   Container(
