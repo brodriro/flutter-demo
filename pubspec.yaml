@@ -21,6 +21,7 @@ dependencies:
   equatable: ^0.6.0
   hydrated_bloc: ^2.0.0
   json_annotation: ^3.0.0
+  font_awesome_flutter: ^8.5.0
 
 
 dev_dependencies:

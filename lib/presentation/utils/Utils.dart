@@ -9,6 +9,7 @@ class ThemeColor {
   static final Color backgroundRow = Colors.grey[200];
   static final Color colorText = Colors.grey[700];
   static final Color whiteColor = Colors.white;
+  static final Color whiteColorOpaque = Colors.white70;
 }
 
 class RouteScreen {
