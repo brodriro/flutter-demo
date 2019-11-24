@@ -1,36 +1,89 @@
+import 'dart:io';
+
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewPostScreen extends StatefulWidget {
+  NewPostScreen();
+
   @override
   _NewPostScreenState createState() => _NewPostScreenState();
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
+  TextEditingController _descriptionTextController;
+
+  @override
+  void initState() {
+    _descriptionTextController = TextEditingController();
+    super.initState();
+  }
+
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
+
       color: ThemeColor.newPostBackground,
-      child: Column(
+      child: Row(
+
         children: <Widget>[
           Container(
+            width: double.maxFinite,
             height: MediaQuery.of(context).size.height * 0.62,
             color: ThemeColor.whiteColor,
-            child: Container(
-                // AQUI VA LA FOTO O  EL ICONO PARA TOMAR FOTO
-                ),
+            child: _image == null
+                ? RaisedButton(
+                    onPressed: getImage,
+                    child: Center(
+                      child: Icon(FontAwesomeIcons.camera),
+                    ),
+                  )
+                : Image.file(
+                    _image,
+                    height: 200,
+                  ),
           ),
           Card(
-            margin: EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 32),
+            margin: EdgeInsets.only(left: 16, right: 16, top: MediaQuery.of(context).size.height * 0.62, bottom: 32),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             elevation: 2,
             child: Container(
-              width: double.maxFinite,
-                padding: EdgeInsets.all(10),
-                child: Text("Description")),
+                width: double.maxFinite,
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Description",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ThemeColor.colorText)),
+                    TextField(
+                      controller: _descriptionTextController,
+                      style: TextStyle(
+                          color: ThemeColor.colorText,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic),
+                    )
+                  ],
+                )),
             /*   EditableText(
 
                   )*/
@@ -61,4 +114,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
   }
 
   void _createNewPost() async {}
+
+  @override
+  void dispose() {
+    _descriptionTextController?.dispose();
+    super.dispose();
+  }
 }

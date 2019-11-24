@@ -5,6 +5,7 @@ import 'package:DemoFlutter/presentation/views/components/PostComponent.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedEvent.dart';
 import 'package:DemoFlutter/presentation/views/new_post/NewPostScreen.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -105,7 +106,7 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _onFloatingActionButtonClick() {
+  void _onFloatingActionButtonClick(){
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => NewPostScreen()));
   }
