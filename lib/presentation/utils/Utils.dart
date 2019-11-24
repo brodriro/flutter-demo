@@ -9,7 +9,7 @@ class ThemeColor {
   static final Color backgroundRow = Colors.grey[200];
   static final Color colorText = Colors.grey[700];
   static final Color whiteColor = Colors.white;
-  static final Color whiteColorOpaque = Colors.white70;
+  static final Color newPostBackground = Colors.white70;
 }
 
 class RouteScreen {
@@ -20,4 +20,8 @@ class RouteScreen {
 class CustomFont {
   static final String raleway = "Raleway";
   static final String roboto = "Roboto";
+}
+
+class HeroTagConstants {
+  static final String feedFloatingButton = 'heroFeedIcon';
 }

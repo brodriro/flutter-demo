@@ -26,7 +26,7 @@ class DemoApp extends StatelessWidget {
           primaryColor: ThemeColor.primaryColor,
           accentColor: ThemeColor.colorAccent,
           primaryColorDark: ThemeColor.primaryColor,
-          fontFamily: CustomFont.roboto),
+          fontFamily: CustomFont.raleway),
       initialRoute: RouteScreen.home,
       debugShowCheckedModeBanner: false,
       routes: {

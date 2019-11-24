@@ -1,8 +1,7 @@
-import 'package:DemoFlutter/domain/entities/UserAuth.dart';
-import 'package:DemoFlutter/data/local/DatabaseHelper.dart';
 import 'package:DemoFlutter/data/local/entities/UserEntity.dart';
+import 'package:DemoFlutter/domain/entities/UserAuth.dart';
 import 'package:DemoFlutter/domain/repository/user/UserRepositoryLocal.dart';
-import 'package:flutter/foundation.dart';
+import 'package:sql_helper/sql_helper.dart';
 
 class UserRepositoryLocalImp implements UserRepositoryLocal {
   DatabaseHelper databaseHelper;
@@ -11,42 +10,36 @@ class UserRepositoryLocalImp implements UserRepositoryLocal {
 
   @override
   Future deleteUser(int id) async {
-    await databaseHelper.init();
     await databaseHelper.deleteRecord(
-        UserEntity.tableName, UserEntity.columnId, id);
-    await databaseHelper.closeConnection();
+        table: UserEntity.tableName,
+        valuesCondition: [UserEntity.columnId],
+        whereColumns: [id.toString()]);
   }
 
   @override
   Future<UserAuth> getUser() async {
-    await databaseHelper.init();
-
     List<Map> results;
-    results = await databaseHelper.getData(UserEntity.tableName,
+    results = await databaseHelper.getRecords(UserEntity.tableName,
         columns: [UserEntity.columnUsername, UserEntity.columnEmail]);
 
-    debugPrint("Result records: $results");
+    print("Result records: $results");
 
     if (results.length == 0) return null;
 
     UserEntity userEntity = UserEntity.fromMap(results[0]);
-
-    await databaseHelper.closeConnection();
 
     return UserEntity.toUserAuth(userEntity);
   }
 
   @override
   Future<String> saveUser(UserEntity userEntity) async {
-    await databaseHelper.init();
-
     int id = await databaseHelper.insertRecord(
         UserEntity.tableName, userEntity.toMap());
 
-    debugPrint("new Record with id: $id");
+    print("new Record with id: $id");
 
     List<Map<String, dynamic>> results =
-        await databaseHelper.getData(UserEntity.tableName);
+        await databaseHelper.getRecords(UserEntity.tableName);
 
     await databaseHelper.closeConnection();
     return UserEntity.fromMap(results[0]).email;

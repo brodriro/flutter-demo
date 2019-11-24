@@ -1,10 +1,13 @@
 import 'package:DemoFlutter/domain/entities/Post.dart';
+import 'package:DemoFlutter/presentation/utils/Utils.dart';
 import 'package:DemoFlutter/presentation/views/components/Miscellaneous.dart';
 import 'package:DemoFlutter/presentation/views/components/PostComponent.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedBloc.dart';
 import 'package:DemoFlutter/presentation/views/feed/bloc/FeedEvent.dart';
+import 'package:DemoFlutter/presentation/views/new_post/NewPostScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'bloc/FeedState.dart';
 
@@ -44,7 +47,15 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
             posts = state.feedList;
           }
 
-          return (posts == null) ? CircularProgressComponent() : _buildPost();
+          return Scaffold(
+            body: (posts == null) ? CircularProgressComponent() : _buildPost(),
+            floatingActionButton: FloatingActionButton(
+              onPressed: _onFloatingActionButtonClick,
+              heroTag: HeroTagConstants.feedFloatingButton,
+              backgroundColor: ThemeColor.colorAccent,
+              child: Icon(FontAwesomeIcons.plus),
+            ),
+          );
         },
       ),
     );
@@ -92,5 +103,10 @@ class _FeedScreen extends State<FeedScreen> with TickerProviderStateMixin {
     _animationController.dispose();
     bloc.close();
     super.dispose();
+  }
+
+  void _onFloatingActionButtonClick() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => NewPostScreen()));
   }
 }

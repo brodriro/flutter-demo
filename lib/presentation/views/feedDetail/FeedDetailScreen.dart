@@ -1,6 +1,6 @@
 import 'package:DemoFlutter/domain/entities/Post.dart';
 import 'package:DemoFlutter/presentation/utils/Utils.dart';
-import 'package:DemoFlutter/presentation/views/components/cComment.dart';
+import 'package:DemoFlutter/presentation/views/components/CommentComponent.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailBloc.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailEvent.dart';
 import 'package:DemoFlutter/presentation/views/feedDetail/bloc/FeedDetailState.dart';
